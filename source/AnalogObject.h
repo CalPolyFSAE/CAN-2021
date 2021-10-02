@@ -1,7 +1,7 @@
 #ifndef ANALOGOBJECT
 #define ANALOGOBJECT
 
-#include "CanMessageStructs.h"
+//#include "CanMessageStructs.h"
 #include "MKE18F16.h"
 
 typedef struct{

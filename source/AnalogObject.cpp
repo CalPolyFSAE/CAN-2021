@@ -3,8 +3,8 @@
 #include "pin_mux.h"
 #include "MKE18F16.h"
 #include "AnalogObject.h"
-#include "CanMessageStructs.h"
-#include "main.h"
+//#include "CanMessageStructs.h"
+//#include "main.h"
 
 //for tick count imports
 #include "FreeRTOS.h"
