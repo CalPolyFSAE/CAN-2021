@@ -4,7 +4,7 @@ BSP_PATH = '../MKELibrary/'
 
 import os
 
-GNU_PATH = '/home/seena18/gcc-arm-none-eabi-10.3-2021.07/bin/'
+GNU_PATH = '/mnt/c/Users/seena/Desktop/gcc-arm-none-eabi-10.3-2021.07/bin/'
 
 compileTarget = 'main'
 

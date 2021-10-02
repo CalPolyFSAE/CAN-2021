@@ -1,4 +1,5 @@
-build/board/pin_mux.o: build/board/pin_mux.c \
+build/source/AnalogObject.o: build/source/AnalogObject.cpp \
+ board/clock_config.h \
  /mnt/c/Users/seena/Documents/Github/MKELibrary/drivers/fsl_common.h \
  /mnt/c/Users/seena/Documents/Github/MKELibrary/CMSIS/fsl_device_registers.h \
  /mnt/c/Users/seena/Documents/Github/MKELibrary/CMSIS/MKE18F16.h \
@@ -10,7 +11,19 @@ build/board/pin_mux.o: build/board/pin_mux.c \
  /mnt/c/Users/seena/Documents/Github/MKELibrary/CMSIS/MKE18F16_features.h \
  /mnt/c/Users/seena/Documents/Github/MKELibrary/drivers/fsl_clock.h \
  /mnt/c/Users/seena/Documents/Github/MKELibrary/drivers/fsl_common.h \
- build/board/pin_mux.h
+ /mnt/c/Users/seena/Documents/Github/MKELibrary/lib/adc.h \
+ /mnt/c/Users/seena/Documents/Github/MKELibrary/System/Service.h \
+ /mnt/c/Users/seena/Documents/Github/MKELibrary/drivers/fsl_adc12.h \
+ /mnt/c/Users/seena/Documents/Github/MKELibrary/drivers/fsl_clock.h \
+ board/pin_mux.h \
+ /mnt/c/Users/seena/Documents/Github/MKELibrary/CMSIS/MKE18F16.h \
+ build/source/AnalogObject.h rtos/include/FreeRTOS.h \
+ source/FreeRTOSConfig.h \
+ /mnt/c/Users/seena/Documents/Github/MKELibrary/CMSIS/core_cm4.h \
+ rtos/include/projdefs.h rtos/include/portable.h \
+ rtos/include/deprecated_definitions.h rtos/portable/ARM_CM4F/portmacro.h \
+ rtos/include/mpu_wrappers.h rtos/include/task.h rtos/include/list.h
+board/clock_config.h:
 /mnt/c/Users/seena/Documents/Github/MKELibrary/drivers/fsl_common.h:
 /mnt/c/Users/seena/Documents/Github/MKELibrary/CMSIS/fsl_device_registers.h:
 /mnt/c/Users/seena/Documents/Github/MKELibrary/CMSIS/MKE18F16.h:
@@ -22,4 +35,20 @@ build/board/pin_mux.o: build/board/pin_mux.c \
 /mnt/c/Users/seena/Documents/Github/MKELibrary/CMSIS/MKE18F16_features.h:
 /mnt/c/Users/seena/Documents/Github/MKELibrary/drivers/fsl_clock.h:
 /mnt/c/Users/seena/Documents/Github/MKELibrary/drivers/fsl_common.h:
-build/board/pin_mux.h:
+/mnt/c/Users/seena/Documents/Github/MKELibrary/lib/adc.h:
+/mnt/c/Users/seena/Documents/Github/MKELibrary/System/Service.h:
+/mnt/c/Users/seena/Documents/Github/MKELibrary/drivers/fsl_adc12.h:
+/mnt/c/Users/seena/Documents/Github/MKELibrary/drivers/fsl_clock.h:
+board/pin_mux.h:
+/mnt/c/Users/seena/Documents/Github/MKELibrary/CMSIS/MKE18F16.h:
+build/source/AnalogObject.h:
+rtos/include/FreeRTOS.h:
+source/FreeRTOSConfig.h:
+/mnt/c/Users/seena/Documents/Github/MKELibrary/CMSIS/core_cm4.h:
+rtos/include/projdefs.h:
+rtos/include/portable.h:
+rtos/include/deprecated_definitions.h:
+rtos/portable/ARM_CM4F/portmacro.h:
+rtos/include/mpu_wrappers.h:
+rtos/include/task.h:
+rtos/include/list.h:
