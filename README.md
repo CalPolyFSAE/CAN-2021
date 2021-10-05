@@ -1,3 +1,5 @@
+## Nakul Nayak
+
 ## RTOS Template Notes
 
 The config file `source/FreeRTOSConfig.h` should work out of the box.
