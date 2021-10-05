@@ -7,8 +7,8 @@
 typedef struct{
     ADC_Type *adcNumber1;
     int adcChannel1;
-    ADC_Type *adcNumber2;
-    int adcChannel2;
+    //ADC_Type *adcNumber2;
+    //int adcChannel2;
 } AnalogObjectData;
 
 class AnalogObject{

@@ -9,7 +9,7 @@
 #include "MKE18F16.h"
 #include "pin_mux.h"
 #include "clock_config.h"
-
+#include "constants.h"
 //Defining Objects
 #define a1_ADC_1 ADC2
 #define a1_Channel_1 13
