@@ -21,7 +21,7 @@ AnalogObject::AnalogObject(AnalogObjectData data){
 void AnalogObject::readValues(){
     adc::ADC& add = adc::ADC::StaticClass();
     this->pin_data_1 = add.read(data.adcNumber1, data.adcChannel1);
-    this->pin_data_2 = add.read(data.adcNumber2, data.adcChannel2);
+    //this->pin_data_2 = add.read(data.adcNumber2, data.adcChannel2);
 }
 
 // Universal

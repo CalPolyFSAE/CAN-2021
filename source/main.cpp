@@ -3,17 +3,33 @@
 #include "task.h"
 #include "timers.h"
 #include "semphr.h"
-
+#include "AnalogObject.h"
+#include "adc.h"
 /* Hardware includes. */
 #include "MKE18F16.h"
 #include "pin_mux.h"
 #include "clock_config.h"
 
+//Defining Objects
+#define a1_ADC_1 ADC2
+#define a1_Channel_1 13
+
+using namespace BSP;
+
 int main( void )
 {
+    
     BOARD_InitBootClocks();
     BOARD_InitBootPins();
-
+    adc::ADC::ConstructStatic(NULL);
+    
+    uint16_t val1;
+    AnalogObjectData a1Data = (AnalogObjectData){a1_ADC_1, a1_Channel_1};
+    AnalogObject *a1 = new AnalogObject(a1Data);
+    a1->readValues();
+    val1 = a1->pin_data_1;
+    
+    
     // you gotta make a task right here
     
 	/* Start the scheduler. */
