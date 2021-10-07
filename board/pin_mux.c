@@ -17,6 +17,7 @@ processor_version: 5.0.0
 /* clang-format on */
 
 #include "fsl_common.h"
+#include "fsl_port.h"
 #include "pin_mux.h"
 
 /* FUNCTION ************************************************************************************************************
