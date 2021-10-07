@@ -4,8 +4,9 @@ BSP_PATH = '../MKELibrary/'
 
 import os
 
-GNU_PATH = '/mnt/c/Users/seena/Desktop/gcc-arm-none-eabi-10.3-2021.07/bin/'
-
+#don't delete either path, just comment out the one that isn't yours
+#GNU_PATH = '/mnt/c/Users/seena/Desktop/gcc-arm-none-eabi-10.3-2021.07/bin/'
+GNU_PATH = '/Users/nakul.nayak/gcc-arm-none-eabi-10.3-2021.07/bin/' 
 compileTarget = 'main'
 
 # Create Communal build directory to store all the .o's
