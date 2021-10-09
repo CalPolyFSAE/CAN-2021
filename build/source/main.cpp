@@ -1,20 +1,44 @@
-/* Kernel includes. */
+ /* Kernel includes. */
 #include "FreeRTOS.h"
 #include "task.h"
 #include "timers.h"
 #include "semphr.h"
 #include "AnalogObject.h"
 #include "adc.h"
+#include "StateMachine.h"
+#include "CanMessage.h"
 /* Hardware includes. */
 #include "MKE18F16.h"
 #include "pin_mux.h"
 #include "clock_config.h"
 #include "constants.h"
-//Defining Objects
-#define a1_ADC_1 ADC2
-#define a1_Channel_1 13
+
 
 using namespace BSP;
+ 
+void taskReadHunHzValuesSendCanMessages(void *){
+    TickType_t xLastWakeTime;
+	for(;;){
+		xLastWakeTime = xTaskGetTickCount();
+        StateMachine::readAdcValues();
+        CanMessage::sendTime();
+		CanMessage::sendHunHz();
+        CANSensors sensorValues = StateMachine::getCANSensors();
+		vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS((1/.1)));
+    }
+}
+void taskReadSixtyHzValuesSendCanMessages(void *){
+    TickType_t xLastWakeTime;
+	for(;;){
+		xLastWakeTime = xTaskGetTickCount();
+        StateMachine::readAdcValues();
+        CanMessage::sendTime();
+		CanMessage::sendSixtyHz();
+        CANSensors sensorValues = StateMachine::getCANSensors();
+		vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS((1/.06)));
+    }
+}
+
 
 int main( void )
 {
@@ -23,11 +47,8 @@ int main( void )
     BOARD_InitBootPins();
     adc::ADC::ConstructStatic(NULL);
     
-    uint16_t val1;
-    AnalogObjectData a1Data = (AnalogObjectData){a1_ADC_1, a1_Channel_1};
-    AnalogObject *a1 = new AnalogObject(a1Data);
-    a1->readValues();
-    val1 = a1->pin_data_1;
+	xTaskCreate(taskReadHunHzValuesSendCanMessages, "taskReadHunHzValuesSendCanMessages", 1000, NULL, 2, NULL);
+    xTaskCreate(taskReadSixtyHzValuesSendCanMessages, "taskReadSixtyHzValuesSendCanMessages", 1000, NULL, 2, NULL);
     
     
     // you gotta make a task right here

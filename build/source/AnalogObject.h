@@ -25,7 +25,6 @@ public:
     void readValues();
     static void initADC();
     uint16_t pin_data_1;
-    uint16_t pin_data_2;
 };
 
 #endif

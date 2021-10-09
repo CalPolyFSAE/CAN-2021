@@ -33,4 +33,9 @@
 #define Sensor8_ADC ADC2
 #define Sensor8_Channel 13
 
+#define CAN_ID 0x100
+#define CAN_BUS 0
+#define CAN_BAUD_RATE 1000000
+
+
 #endif

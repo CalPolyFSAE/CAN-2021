@@ -23,8 +23,8 @@ typedef struct{
 class StateMachine {
 public:
     static void readAdcValues();
-    static PedalboxFaults getFaults();
-    static PedalBoxSensors getPedalboxSensors();
+    //static PedalboxFaults getFaults();
+    static CANSensors getCANSensors();
     static void setBspdInfoTrue();
     static void setBspdInfoFalse();
     static void setBspdCriticalTrue();
@@ -40,7 +40,7 @@ private:
     static StateMachine *instance;
     static StateMachine *getInstance();
     CANSensors cansensors;
-    PedalboxFaults pedalboxFaults;
+    //PedalboxFaults pedalboxFaults;
 };
 
 
