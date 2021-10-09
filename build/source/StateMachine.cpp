@@ -9,7 +9,7 @@
 StateMachine *StateMachine::instance;
 
 StateMachine::StateMachine() {
-    pedalboxFaults = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    //pedalboxFaults = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
     //AnalogObjectData not needed at all
     /*AnalogObjectData throttleData = (AnalogObjectData){THROTTLE_ADC_1, THROTTLE_CHANNEL_1,
@@ -18,12 +18,12 @@ StateMachine::StateMachine() {
 
     AnalogObject *sensor1 = new AnalogObject(Sensor1_ADC,Sensor1_Channel);
     AnalogObject *sensor2 = new AnalogObject(Sensor2_ADC,Sensor2_Channel);
-    AnalogObject *sensor3 = new AnalogObject(Sensor3_ADC,Sensor3_Channel});
-    AnalogObject *sensor4 = new AnalogObject({Sensor4_ADC,Sensor4_Channel});
-    AnalogObject *sensor5 = new AnalogObject({Sensor5_ADC,Sensor5_Channel});
-    AnalogObject *sensor6 = new AnalogObject({Sensor6_ADC,Sensor6_Channel});
-    AnalogObject *sensor7 = new AnalogObject({Sensor7_ADC,Sensor7_Channel});
-    AnalogObject *sensor8 = new AnalogObject({Sensor8_ADC,Sensor8_Channel});
+    AnalogObject *sensor3 = new AnalogObject(Sensor3_ADC,Sensor3_Channel);
+    AnalogObject *sensor4 = new AnalogObject(Sensor4_ADC,Sensor4_Channel);
+    AnalogObject *sensor5 = new AnalogObject(Sensor5_ADC,Sensor5_Channel);
+    AnalogObject *sensor6 = new AnalogObject(Sensor6_ADC,Sensor6_Channel);
+    AnalogObject *sensor7 = new AnalogObject(Sensor7_ADC,Sensor7_Channel);
+    AnalogObject *sensor8 = new AnalogObject(Sensor8_ADC,Sensor8_Channel);
 
     
 
@@ -44,17 +44,22 @@ StateMachine *StateMachine::getInstance() {
     return instance;
 }
 
-PedalBoxSensors StateMachine::getPedalboxSensors(){
+CANSensors StateMachine::getCANSensors(){
     StateMachine *s = getInstance();
-    return s->pedalBoxSensors;
+    return s->cansensors;
 }
 
 void StateMachine::readAdcValues() {
     StateMachine *s = getInstance();
 
-    s->pedalBoxSensors.brakePressure->readValues();
-    s->pedalBoxSensors.throttle->readValues();
-    s->pedalBoxSensors.apps->readValues();
+    s->cansensors.sensor1->readValues();
+    s->cansensors.sensor1->readValues();
+    s->cansensors.sensor1->readValues();
+    s->cansensors.sensor1->readValues();
+    s->cansensors.sensor1->readValues();
+    s->cansensors.sensor1->readValues();
+    s->cansensors.sensor1->readValues();
+    s->cansensors.sensor1->readValues();
 }
 
 /*
