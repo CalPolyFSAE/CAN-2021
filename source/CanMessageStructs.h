@@ -10,14 +10,14 @@ typedef struct{
     uint16_t AnalogData2;
     uint16_t AnalogData3;
     uint16_t AnalogData4;
-}BrakePresThrottleAndFaultsCanstruct;
+}FirstFourSensorstruct;
 
 typedef struct{
     uint16_t AnalogData5;
     uint16_t AnalogData6;
     uint16_t AnalogData7;
     uint16_t AnalogData8;
-}BrakePresThrottleAndFaultsCanstruct;
+}LastFourSensorstruct;
 
 
 
