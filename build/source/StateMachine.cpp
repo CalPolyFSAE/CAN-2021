@@ -12,23 +12,29 @@ StateMachine::StateMachine() {
     pedalboxFaults = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
     //AnalogObjectData not needed at all
-    AnalogObjectData throttleData = (AnalogObjectData){THROTTLE_ADC_1, THROTTLE_CHANNEL_1,
+    /*AnalogObjectData throttleData = (AnalogObjectData){THROTTLE_ADC_1, THROTTLE_CHANNEL_1,
                                                        THROTTLE_ADC_1, THROTTLE_CHANNEL_1};
-    AnalogObject *throttle = new AnalogObject(throttleData);
+    AnalogObject *throttle = new AnalogObject(throttleData);*/
 
-    AnalogObjectData brakePressureData = (AnalogObjectData){BRAKE_PRESSURE_1_ADC, BRAKE_PRESSURE_1_CHANNEL,
-                                                            BRAKE_PRESSURE_2_ADC, BRAKE_PRESSURE_2_CHANNEL};
-    AnalogObject *brakePressure = new AnalogObject(brakePressureData);
+    AnalogObject *sensor1 = new AnalogObject(Sensor1_ADC,Sensor1_Channel);
+    AnalogObject *sensor2 = new AnalogObject(Sensor2_ADC,Sensor2_Channel);
+    AnalogObject *sensor3 = new AnalogObject(Sensor3_ADC,Sensor3_Channel});
+    AnalogObject *sensor4 = new AnalogObject({Sensor4_ADC,Sensor4_Channel});
+    AnalogObject *sensor5 = new AnalogObject({Sensor5_ADC,Sensor5_Channel});
+    AnalogObject *sensor6 = new AnalogObject({Sensor6_ADC,Sensor6_Channel});
+    AnalogObject *sensor7 = new AnalogObject({Sensor7_ADC,Sensor7_Channel});
+    AnalogObject *sensor8 = new AnalogObject({Sensor8_ADC,Sensor8_Channel});
 
-    AnalogObjectData appsData = (AnalogObjectData){APPS_1_ADC, APPS_1_Channel,
-                                                   APPS_2_ADC, APPS_2_Channel};
+    
+
+    
     //Apps *apps = new Apps(appsData);
 
     //BspdData bspdData = (BspdData){THROTTLE_ADC_1, THROTTLE_CHANNEL_1, BRAKE_PRESSURE_1_ADC, BRAKE_PRESSURE_1_CHANNEL,
-                                   BRAKE_PRESSURE_2_ADC, BRAKE_PRESSURE_2_CHANNEL};
+    //                               BRAKE_PRESSURE_2_ADC, BRAKE_PRESSURE_2_CHANNEL};
     //Bspd *bspd = new Bspd(bspdData);
 
-    this->pedalBoxSensors = {brakePressure, throttle, apps, bspd};
+    this->cansensors = {sensor1,sensor2,sensor3,sensor4,sensor5,sensor6,sensor7,sensor8};
 }
 
 StateMachine *StateMachine::getInstance() {
@@ -51,6 +57,7 @@ void StateMachine::readAdcValues() {
     s->pedalBoxSensors.apps->readValues();
 }
 
+/*
 void StateMachine::checkFaults() {
     StateMachine *s = getInstance();
 
@@ -110,7 +117,7 @@ void StateMachine::setOverUnderVoltageCriticalTrue() {
 void StateMachine::setOverUnderVoltageCriticalFalse() {
     StateMachine *s = getInstance();
     s->pedalboxFaults.overUnderVoltageCritical = 0;
-}
+}*/
 
 
 

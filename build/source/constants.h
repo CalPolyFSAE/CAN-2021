@@ -1,5 +1,5 @@
 #ifndef CONSTANTS_H
-#define COMSTANTS_H
+#define CONSTANTS_H
 
 #define Sensor1_Name ""
 #define Sensor1_ADC ADC2
