@@ -7,6 +7,7 @@
 #include "adc.h"
 #include "StateMachine.h"
 #include "CanMessage.h"
+#include <ctime>
 /* Hardware includes. */
 #include "MKE18F16.h"
 #include "pin_mux.h"
@@ -14,10 +15,16 @@
 #include "constants.h"
 
 
+
 using namespace BSP;
  
 void taskReadHunHzValuesSendCanMessages(void *){
     TickType_t xLastWakeTime;
+	time_t startime=clock();
+	time_t endtime;
+	time_t duration;
+	double dur;
+	int count = 0;
 	for(;;){
 		xLastWakeTime = xTaskGetTickCount();
         StateMachine::readAdcValues();
@@ -25,6 +32,13 @@ void taskReadHunHzValuesSendCanMessages(void *){
 		CanMessage::sendHunHz();
         CANSensors sensorValues = StateMachine::getCANSensors();
 		vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS((1/.1)));
+		count++;
+		if(count == 59){
+			endtime=clock();
+			duration = endtime-startime;
+			dur = (double)duration/CLOCKS_PER_SEC;
+		}
+
     }
 }
 void taskReadSixtyHzValuesSendCanMessages(void *){
