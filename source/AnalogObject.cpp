@@ -21,6 +21,7 @@ AnalogObject::AnalogObject(ADC_Type *adc,int adcChannel){
 // Universal
 void AnalogObject::readValues(){
     adc::ADC& add = adc::ADC::StaticClass();
+    //read data into each sensor's pin_data_1 attribute (for testing purposes)
     this->pin_data_1 = add.read(adc,adcChannel);
     //this->pin_data_2 = add.read(data.adcNumber2, data.adcChannel2);
 }

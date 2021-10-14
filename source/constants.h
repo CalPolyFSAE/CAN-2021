@@ -1,6 +1,9 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+/*definiting data variables for 8 sensors below. for each sensor, define name, adc converter,
+and channel to read data from */
+
 #define Sensor1_Name ""
 #define Sensor1_ADC ADC2
 #define Sensor1_Channel 13

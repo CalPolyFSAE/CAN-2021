@@ -19,11 +19,4 @@ typedef struct{
     uint16_t AnalogData8;
 }HundredHzstruct;
 
-
-
-typedef struct{
-    uint16_t AppsPin1;
-    uint16_t AppsPin2;
-}AppsCanstruct;
-
 #endif //CANMESSAGESTRUCTS_H

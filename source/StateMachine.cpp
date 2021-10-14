@@ -53,7 +53,6 @@ void StateMachine::readAdcValues() {
     StateMachine *s = getInstance();
 
     s->cansensors.sensor1->readValues();
-<<<<<<< HEAD
     s->cansensors.sensor2->readValues();
     s->cansensors.sensor3->readValues();
     s->cansensors.sensor4->readValues();
@@ -61,15 +60,6 @@ void StateMachine::readAdcValues() {
     s->cansensors.sensor6->readValues();
     s->cansensors.sensor7->readValues();
     s->cansensors.sensor8->readValues();
-=======
-    s->cansensors.sensor1->readValues();
-    s->cansensors.sensor1->readValues();
-    s->cansensors.sensor1->readValues();
-    s->cansensors.sensor1->readValues();
-    s->cansensors.sensor1->readValues();
-    s->cansensors.sensor1->readValues();
-    s->cansensors.sensor1->readValues();
->>>>>>> 10775e88639ac53ba13eed7406d6228e763e0706
 }
 
 /*
