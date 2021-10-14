@@ -24,7 +24,13 @@ class StateMachine {
 public:
     static void readAdcValues();
     //static PedalboxFaults getFaults();
+<<<<<<< HEAD
     static CANSensors getCANSensors();
+=======
+    
+    static CANSensors getCANSensors();
+    /*
+>>>>>>> 10775e88639ac53ba13eed7406d6228e763e0706
     static void setBspdInfoTrue();
     static void setBspdInfoFalse();
     static void setBspdCriticalTrue();
@@ -34,6 +40,7 @@ public:
     static void setOverUnderVoltageInfoFalse();
     static void setOverUnderVoltageCriticalTrue();
     static void setOverUnderVoltageCriticalFalse();
+    */
 
 private:
     StateMachine();

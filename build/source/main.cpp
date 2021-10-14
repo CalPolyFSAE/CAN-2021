@@ -61,8 +61,11 @@ int main( void )
     BOARD_InitBootPins();
     adc::ADC::ConstructStatic(NULL);
     
+<<<<<<< HEAD
 	xTaskCreate(taskReadHunHzValuesSendCanMessages, "taskReadHunHzValuesSendCanMessages", 1000, NULL, 2, NULL);
     xTaskCreate(taskReadSixtyHzValuesSendCanMessages, "taskReadSixtyHzValuesSendCanMessages", 1000, NULL, 2, NULL);
+=======
+>>>>>>> 10775e88639ac53ba13eed7406d6228e763e0706
     
     
     // you gotta make a task right here
