@@ -37,7 +37,7 @@ void CanMessage::initCan() {
 void CanMessage::sendTimeHelper(){
     can::CANlight &can = can::CANlight::StaticClass();
     can::CANlight::frame frame;
-    frame.id = CAN_ID;
+    frame.id = CAN_ID_TIME;
     frame.ext = 1;
     frame.dlc = 8;
     uint64_t currentTime = xTaskGetTickCount();
@@ -45,24 +45,80 @@ void CanMessage::sendTimeHelper(){
     can.tx(CAN_BUS, frame);
 }
 
-void CanMessage::sendHunHzHelper(){
-    CANSensors canSensors = StateMachine::getCANSensors();
-    HundredHzstruct canStruct;
+void CanMessage::sendSensorsHelper(){
+    StateMachine *s = getInstance();
+    AnalogObject canSensors[8] = StateMachine::getSensors();
+    FirstSensorsStruct canStruct;
+    LastSensorStruct canLastStruct;
 
-    canStruct.AnalogData5 = canSensors.sensor5->pin_data_1;
-    canStruct.AnalogData6 = canSensors.sensor6->pin_data_1;
-    canStruct.AnalogData7 = canSensors.sensor7->pin_data_1;
-    canStruct.AnalogData8 = 0;
+    canStruct.AnalogData1 = s->canSensors[0]->pin_data_1;
+    canStruct.AnalogData2 = s->canSensors[1]->pin_data_1;
+    canStruct.AnalogData3 = s->canSensors[2]->pin_data_1;
+    canStruct.AnalogData4 = s->canSensors[3]->pin_data_1;;
+    canLastStruct.AnalogData5 = s->canSensors[4]->pin_data_1;
+    canLastStruct.AnalogData6 = s->canSensors[5]->pin_data_1;
+    canLastStruct.AnalogData7 = s->canSensors[6]->pin_data_1;
+    canLastStruct.AnalogData8 = s->canSensors[7]->pin_data_1;
+    
+
+    can::CANlight &can = can::CANlight::StaticClass();
+    can::CANlight::frame frame1;
+    frame1.id = CAN_ID_TIME+1;
+    frame1.ext = 1;
+    frame1.dlc = 8;
+    memcpy(frame1.data, &canStruct, sizeof(canSensors)/2);
+    can.tx(CAN_BUS, frame1);
+
+    can::CANlight &can1 = can::CANlight::StaticClass();
+    can::CANlight::frame frame2;
+    frame2.id = CAN_ID_TIME+2;
+    frame2.ext = 1;
+    frame2.dlc = 8;
+    memcpy(frame2.data, &canLastStruct, sizeof(canSensors)/2);
+    can.tx(CAN_BUS, frame2);
+
+    //can::CANlight::frame fHun = can.readrx(1);
+}
+
+void CanMessage::sendFourSGaugesHelper(){
+    StateMachine *s = getInstance();
+    AnalogObject canSGauges[5] = StateMachine::getSGauges();
+    FourSGaugeStruct canFourSGaugesStruct;
+
+    canFourSGaugesStruct.AnalogData9 = s->canSGauges[0]->pin_data_1;
+    canFourSGaugesStruct.AnalogData10 = s->canSGauges[1]->pin_data_1;
+    canFourSGaugesStruct.AnalogData11 = s->canSGauges[2]->pin_data_1;
+    canFourSGaugesStruct.AnalogData12 = s->canSGauges[3]->pin_data_1;
 
     can::CANlight &can = can::CANlight::StaticClass();
     can::CANlight::frame frame;
-    frame.id = CAN_ID;
+    frame.id = CAN_ID_TIME+3;
     frame.ext = 1;
     frame.dlc = 8;
-    memcpy(frame.data, &canStruct, sizeof(HundredHzstruct));
+    memcpy(frame.data, &canFourSGaugesStruct, sizeof(canSGauges)*.8);
     can.tx(CAN_BUS, frame);
     can::CANlight::frame fHun = can.readrx(1);
 }
+
+void CanMessage::sendLastSGaugeHelper(){
+    StateMachine *s = getInstance();
+    AnalogObject canLastSGauge[5] = StateMachine::getSGauges();
+    LastSGaugeStruct canLastSGaugeStruct;
+
+    canLastSGaugeStruct.AnalogData13 = s->canLastSGauge[4]->pin_data_1;
+
+    can::CANlight &can = can::CANlight::StaticClass();
+    can::CANlight::frame frame;
+    frame.id = CAN_ID_TIME+4;
+    frame.ext = 1;
+    frame.dlc = 8;
+    memcpy(frame.data, &canLastSGaugeStruct, sizeof(canLastSGauge)*.2);
+    can.tx(CAN_BUS, frame);
+    can::CANlight::frame fHun = can.readrx(1);
+}
+
+
+/*
 void CanMessage::sendSixtyHzHelper(){
     CANSensors canSensors = StateMachine::getCANSensors();
     SixtyHzstruct canStruct;
@@ -80,7 +136,7 @@ void CanMessage::sendSixtyHzHelper(){
     memcpy(frame.data, &canStruct, sizeof(SixtyHzstruct));
     can.tx(CAN_BUS, frame);
     can::CANlight::frame fSixty = can.readrx(1);
-}
+}*/
 
 
 void CanMessage::sendTime() {
@@ -88,13 +144,26 @@ void CanMessage::sendTime() {
     c->sendTimeHelper();
 }
 
+/*
 void CanMessage::sendSixtyHz() {
     CanMessage *c = CanMessage::getInstance();
     c->sendSixtyHzHelper();
 }
-void CanMessage::sendHunHz() {
+*/
+
+void CanMessage::sendSensors() {
     CanMessage *c = CanMessage::getInstance();
-    c->sendHunHzHelper();
+    c->sendSensorsHelper();
+}
+
+void CanMessage::sendFourSGauges() {
+    CanMessage *c = CanMessage::getInstance();
+    c->sendFourSGaugesHelper();
+}
+
+void CanMessage::sendLastSGauge() {
+    CanMessage *c = CanMessage::getInstance();
+    c->sendLastSGaugeHelper();
 }
 
 
