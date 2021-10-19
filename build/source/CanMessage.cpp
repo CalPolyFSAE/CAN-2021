@@ -46,19 +46,19 @@ void CanMessage::sendTimeHelper(){
 }
 
 void CanMessage::sendSensorsHelper(){
-    StateMachine *s = getInstance();
+    StateMachine *s = StateMachine::getInstance();
     AnalogObject canSensors[8] = StateMachine::getSensors();
     FirstSensorsStruct canStruct;
     LastSensorStruct canLastStruct;
 
-    canStruct.AnalogData1 = s->canSensors[0]->pin_data_1;
-    canStruct.AnalogData2 = s->canSensors[1]->pin_data_1;
-    canStruct.AnalogData3 = s->canSensors[2]->pin_data_1;
-    canStruct.AnalogData4 = s->canSensors[3]->pin_data_1;;
-    canLastStruct.AnalogData5 = s->canSensors[4]->pin_data_1;
-    canLastStruct.AnalogData6 = s->canSensors[5]->pin_data_1;
-    canLastStruct.AnalogData7 = s->canSensors[6]->pin_data_1;
-    canLastStruct.AnalogData8 = s->canSensors[7]->pin_data_1;
+    canStruct.AnalogData1 = canSensors[0]->pin_data_1;
+    canStruct.AnalogData2 = canSensors[1]->pin_data_1;
+    canStruct.AnalogData3 = canSensors[2]->pin_data_1;
+    canStruct.AnalogData4 = canSensors[3]->pin_data_1;;
+    canLastStruct.AnalogData5 = canSensors[4]->pin_data_1;
+    canLastStruct.AnalogData6 = canSensors[5]->pin_data_1;
+    canLastStruct.AnalogData7 = canSensors[6]->pin_data_1;
+    canLastStruct.AnalogData8 = canSensors[7]->pin_data_1;
     
 
     can::CANlight &can = can::CANlight::StaticClass();
@@ -81,14 +81,14 @@ void CanMessage::sendSensorsHelper(){
 }
 
 void CanMessage::sendFourSGaugesHelper(){
-    StateMachine *s = getInstance();
+    StateMachine *s = StateMachine::getInstance();
     AnalogObject canSGauges[5] = StateMachine::getSGauges();
     FourSGaugeStruct canFourSGaugesStruct;
 
-    canFourSGaugesStruct.AnalogData9 = s->canSGauges[0]->pin_data_1;
-    canFourSGaugesStruct.AnalogData10 = s->canSGauges[1]->pin_data_1;
-    canFourSGaugesStruct.AnalogData11 = s->canSGauges[2]->pin_data_1;
-    canFourSGaugesStruct.AnalogData12 = s->canSGauges[3]->pin_data_1;
+    canFourSGaugesStruct.AnalogData9 = canSGauges[0]->pin_data_1;
+    canFourSGaugesStruct.AnalogData10 = canSGauges[1]->pin_data_1;
+    canFourSGaugesStruct.AnalogData11 = canSGauges[2]->pin_data_1;
+    canFourSGaugesStruct.AnalogData12 = canSGauges[3]->pin_data_1;
 
     can::CANlight &can = can::CANlight::StaticClass();
     can::CANlight::frame frame;
@@ -101,11 +101,11 @@ void CanMessage::sendFourSGaugesHelper(){
 }
 
 void CanMessage::sendLastSGaugeHelper(){
-    StateMachine *s = getInstance();
+    StateMachine *s = StateMachine::getInstance();
     AnalogObject canLastSGauge[5] = StateMachine::getSGauges();
     LastSGaugeStruct canLastSGaugeStruct;
 
-    canLastSGaugeStruct.AnalogData13 = s->canLastSGauge[4]->pin_data_1;
+    canLastSGaugeStruct.AnalogData13 = canLastSGauge[4]->pin_data_1;
 
     can::CANlight &can = can::CANlight::StaticClass();
     can::CANlight::frame frame;
