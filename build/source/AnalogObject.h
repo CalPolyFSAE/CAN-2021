@@ -1,26 +1,18 @@
 #ifndef ANALOGOBJECT
 #define ANALOGOBJECT
 
-//#include "CanMessageStructs.h"
 #include "MKE18F16.h"
 
-/*
-typedef struct{
-    ADC_Type *adcNumber1;
-    int adcChannel1;
-    //ADC_Type *adcNumber2;
-    //int adcChannel2;
-} AnalogObjectData;
-*/
-
+// AnalogObject class declaration 
 class AnalogObject{
 protected:
-    //AnalogObjectData data;
+
     ADC_Type *adc;
     int adcChannel;
 
 
 public:
+    //function definitions
     AnalogObject(ADC_Type *adc,int adcChannel);
     void readValues();
     static void initADC();
