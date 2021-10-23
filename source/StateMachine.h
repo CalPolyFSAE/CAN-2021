@@ -2,29 +2,20 @@
 #define STATEMACHINE_H
 
 #include "AnalogObject.h"
-//#include "Apps.h"
-//#include "Bspd.h"
 
+//4 StateMachine objects, one for first four sensors, one for last 4 sensors, one for first 4 strain gauges, 1 for last strain gauge
 typedef struct{
-    //AnalogObject *brakePressure;
-    //AnalogObject *throttle;
     AnalogObject *sensor1;
     AnalogObject *sensor2;
     AnalogObject *sensor3;
     AnalogObject *sensor4;
-    //Apps *apps;
-    //Bspd *bspd;
 }CANFirstSensors;
 
 typedef struct{
-    //AnalogObject *brakePressure;
-    //AnalogObject *throttle;
     AnalogObject *sensor5;
     AnalogObject *sensor6;
     AnalogObject *sensor7;
     AnalogObject *sensor8;
-    //Apps *apps;
-    //Bspd *bspd;
 }CANLastSensors;
 
 typedef struct{
@@ -41,6 +32,7 @@ typedef struct{
 
 
 
+//declaring class vars
 class StateMachine {
 public:
     static void readSensorsAdcValues();
@@ -74,7 +66,6 @@ private:
     CANLastSensors cansensors2;
     CANFourSGauges cansensors3;
     CANLastSGauge cansensors4;
-    //PedalboxFaults pedalboxFaults;
 };
 
 
