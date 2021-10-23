@@ -2,45 +2,58 @@
 #define STATEMACHINE_H
 
 #include "AnalogObject.h"
-//#include "Apps.h"
-//#include "Bspd.h"
 
+//4 StateMachine objects, one for first four sensors, one for last 4 sensors, one for first 4 strain gauges, 1 for last strain gauge
 typedef struct{
-    //AnalogObject *brakePressure;
-    //AnalogObject *throttle;
     AnalogObject *sensor1;
     AnalogObject *sensor2;
     AnalogObject *sensor3;
     AnalogObject *sensor4;
+}CANFirstSensors;
+
+typedef struct{
     AnalogObject *sensor5;
     AnalogObject *sensor6;
     AnalogObject *sensor7;
     AnalogObject *sensor8;
-    //Apps *apps;
-    //Bspd *bspd
-}CANSensors;
+}CANLastSensors;
 
+typedef struct{
+    AnalogObject *sensor9;
+    AnalogObject *sensor10;
+    AnalogObject *sensor11;
+    AnalogObject *sensor12;
+}CANFourSGauges;
+
+typedef struct{
+    AnalogObject *sensor13;
+}CANLastSGauge;
+
+
+
+
+//declaring class vars
 class StateMachine {
 public:
-    static void readAdcValues();
-    //static PedalboxFaults getFaults();
-    static CANSensors getCANSensors();
-    static void setBspdInfoTrue();
-    static void setBspdInfoFalse();
-    static void setBspdCriticalTrue();
-    static void setBspdCriticalFalse();
-    static void checkFaults();
-    static void setOverUnderVoltageInfoTrue();
-    static void setOverUnderVoltageInfoFalse();
-    static void setOverUnderVoltageCriticalTrue();
-    static void setOverUnderVoltageCriticalFalse();
-
+    static void readSensorsAdcValues();
+    static StateMachine *getInstance();
+    static AnalogObject * getSensors();
+    static AnalogObject *  getSGauges();
+    static void readLastSensorsAdcValues();
+    static void readFirstSGaugesAdcValues();
+    static void readLastSGaugeAdcValues();
+    static CANFirstSensors getFirstSensorsCANSensors();
+    static CANLastSensors getLastSensorsCANSensors();
+    static CANFourSGauges getFourSGaugesCANSensors();
+    static CANLastSGauge getLastSGaugeCANSensors();
 private:
     StateMachine();
     static StateMachine *instance;
-    static StateMachine *getInstance();
-    CANSensors cansensors;
-    //PedalboxFaults pedalboxFaults;
+
+    CANFirstSensors cansensors1;
+    CANLastSensors cansensors2;
+    CANFourSGauges cansensors3;
+    CANLastSGauge cansensors4;
 };
 
 

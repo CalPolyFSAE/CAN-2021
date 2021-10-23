@@ -36,9 +36,39 @@ and channel to read data from */
 #define Sensor8_ADC ADC2
 #define Sensor8_Channel 13
 
-#define CAN_ID 0x100
+// constants below are for the 5 strain gauges
+
+#define Sensor9_Name ""
+#define Sensor9_ADC ADC2
+#define Sensor9_Channel 13
+
+#define Sensor10_Name ""
+#define Sensor10_ADC ADC2
+#define Sensor10_Channel 13
+
+#define Sensor11_Name ""
+#define Sensor11_ADC ADC2
+#define Sensor11_Channel 13
+
+#define Sensor12_Name ""
+#define Sensor12_ADC ADC2
+#define Sensor12_Channel 13
+
+#define Sensor13_Name ""
+#define Sensor13_ADC ADC2
+#define Sensor13_Channel 13
+
+#define CAN_ID_TIME  0x0700
+//first 4 sensors = 701
+//last 4 sensors = 702
+//first 5 sgauges = 703
+
+
+
+
 #define CAN_BUS 0
 #define CAN_BAUD_RATE 1000000
+
 
 
 #endif

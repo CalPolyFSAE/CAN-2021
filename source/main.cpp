@@ -1,4 +1,3 @@
- /* Kernel includes. */
 #include "FreeRTOS.h"
 #include "task.h"
 #include "timers.h"
@@ -33,10 +32,18 @@ void taskReadHunHzValuesSendCanMessages(void *){
 	*/
 	for(;;){
 		xLastWakeTime = xTaskGetTickCount();
-        StateMachine::readAdcValues();
+        StateMachine::readSensorsAdcValues();
+    	StateMachine::readLastSensorsAdcValues();
+    	StateMachine::readFirstSGaugesAdcValues();
+     	StateMachine::readLastSGaugeAdcValues();
         CanMessage::sendTime();
-		CanMessage::sendHunHz();
-        CANSensors sensorValues = StateMachine::getCANSensors();
+		CanMessage::sendSensors();
+		CanMessage::sendFourSGauges();
+		CanMessage::sendLastSGauge();
+        CANFirstSensors sensorValues1 = StateMachine::getFirstSensorsCANSensors();
+		CANLastSensors sensorValues2 = StateMachine::getLastSensorsCANSensors();
+		CANFourSGauges sensorValues3 = StateMachine::getFourSGaugesCANSensors();
+		CANLastSGauge sensorValues4 = StateMachine::getLastSGaugeCANSensors();
 		vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS((1/.1)));
 		count++;
 		if(count == 100){
@@ -48,36 +55,6 @@ void taskReadHunHzValuesSendCanMessages(void *){
 
     }
 }
-void taskReadSixtyHzValuesSendCanMessages(void *){
-    TickType_t xLastWakeTime;
-	int start;
-	int end;
-	int duration;
-	int count = 0;
-	/*
-	infinite loop below for reading from 100 HZ sensors. count used to keep track of number of current
-	task cycles. end used to gather number of ticks since task started. Divide end by configTICK_RATE_HZ (stored in duration) to 
-	get number of seconds task has been running. Since if condition is set to count==60, duration should == 1 second
-	for the function to be correctly reading at 60 HZ -- NOTE: having ongoing issue with duration initialization in this
-	function only. however function still runs at 60 hz as expected (end=960 ticks, 960/1000=0.96 sec for 60 task cycles == 62.5 HZ)
-	*/
-	for(;;){
-		xLastWakeTime = xTaskGetTickCount();
-        StateMachine::readAdcValues();
-        CanMessage::sendTime();
-		CanMessage::sendSixtyHz();
-        CANSensors sensorValues = StateMachine::getCANSensors();
-		vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS((1/.06)));
-		count++;
-		if(count == 60){
-			end=xTaskGetTickCount();
-			duration=(end)/1000;
-			//duration=(end)/configTICK_RATE_HZ;
-			//duration = endtime-startime;
-			//dur = (double)duration/CLOCKS_PER_SEC;
-		}
-    }
-}
 
 
 int main( void )
@@ -87,9 +64,8 @@ int main( void )
     BOARD_InitBootPins();
     adc::ADC::ConstructStatic(NULL);
     
-	//create two tasks: first one to read from 100 HZ sensors, second one to read from 60 HZ sensors
+	//create a task to read 100 Hz values for sensors and strain gauges
 	xTaskCreate(taskReadHunHzValuesSendCanMessages, "taskReadHunHzValuesSendCanMessages", 1000, NULL, 2, NULL);
-    xTaskCreate(taskReadSixtyHzValuesSendCanMessages, "taskReadSixtyHzValuesSendCanMessages", 1000, NULL, 2, NULL);
     
     
 	/* Start the scheduler. */

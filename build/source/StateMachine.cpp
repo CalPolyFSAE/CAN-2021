@@ -1,6 +1,7 @@
 #include "StateMachine.h"
 #include "AnalogObject.h"
 #include "constants.h"
+#include <array>
 /*#include "main.h"
 #include "Apps.h"
 #include "Bspd.h"
@@ -9,13 +10,9 @@
 StateMachine *StateMachine::instance;
 
 StateMachine::StateMachine() {
-    //pedalboxFaults = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
-    //AnalogObjectData not needed at all
-    /*AnalogObjectData throttleData = (AnalogObjectData){THROTTLE_ADC_1, THROTTLE_CHANNEL_1,
-                                                       THROTTLE_ADC_1, THROTTLE_CHANNEL_1};
-    AnalogObject *throttle = new AnalogObject(throttleData);*/
-
+    //initializing 8 sensor objects
+    
     AnalogObject *sensor1 = new AnalogObject(Sensor1_ADC,Sensor1_Channel);
     AnalogObject *sensor2 = new AnalogObject(Sensor2_ADC,Sensor2_Channel);
     AnalogObject *sensor3 = new AnalogObject(Sensor3_ADC,Sensor3_Channel);
@@ -25,18 +22,21 @@ StateMachine::StateMachine() {
     AnalogObject *sensor7 = new AnalogObject(Sensor7_ADC,Sensor7_Channel);
     AnalogObject *sensor8 = new AnalogObject(Sensor8_ADC,Sensor8_Channel);
 
+    //initializing 5 strain gauge objects
+    AnalogObject *sensor9 = new AnalogObject(Sensor9_ADC,Sensor9_Channel);
+    AnalogObject *sensor10 = new AnalogObject(Sensor10_ADC,Sensor10_Channel);
+    AnalogObject *sensor11 = new AnalogObject(Sensor11_ADC,Sensor11_Channel);
+    AnalogObject *sensor12 = new AnalogObject(Sensor12_ADC,Sensor12_Channel);
+    AnalogObject *sensor13 = new AnalogObject(Sensor13_ADC,Sensor13_Channel);
     
-
-    
-    //Apps *apps = new Apps(appsData);
-
-    //BspdData bspdData = (BspdData){THROTTLE_ADC_1, THROTTLE_CHANNEL_1, BRAKE_PRESSURE_1_ADC, BRAKE_PRESSURE_1_CHANNEL,
-    //                               BRAKE_PRESSURE_2_ADC, BRAKE_PRESSURE_2_CHANNEL};
-    //Bspd *bspd = new Bspd(bspdData);
-
-    this->cansensors = {sensor1,sensor2,sensor3,sensor4,sensor5,sensor6,sensor7,sensor8};
+    //initializing 4 statemachine objects
+    this->cansensors1 = {sensor1,sensor2,sensor3,sensor4};
+    this->cansensors2 = {sensor5,sensor6,sensor7,sensor8};
+    this->cansensors3 = {sensor9,sensor10,sensor11,sensor12};
+    this->cansensors4 = {sensor13};
 }
 
+//returns singleton instance of StateMachine
 StateMachine *StateMachine::getInstance() {
     if(instance == 0){
         instance = new StateMachine();
@@ -44,86 +44,57 @@ StateMachine *StateMachine::getInstance() {
     return instance;
 }
 
-CANSensors StateMachine::getCANSensors(){
+//4 get functions below return statemachine data for corresponding sensor/strain gauge
+CANFirstSensors StateMachine::getFirstSensorsCANSensors(){
     StateMachine *s = getInstance();
-    return s->cansensors;
+    return s->cansensors1;
 }
 
-void StateMachine::readAdcValues() {
+CANLastSensors StateMachine::getLastSensorsCANSensors(){
     StateMachine *s = getInstance();
-
-    s->cansensors.sensor1->readValues();
-    s->cansensors.sensor2->readValues();
-    s->cansensors.sensor3->readValues();
-    s->cansensors.sensor4->readValues();
-    s->cansensors.sensor5->readValues();
-    s->cansensors.sensor6->readValues();
-    s->cansensors.sensor7->readValues();
-    s->cansensors.sensor8->readValues();
+    return s->cansensors2;
 }
 
-/*
-void StateMachine::checkFaults() {
+CANFourSGauges StateMachine::getFourSGaugesCANSensors(){
     StateMachine *s = getInstance();
-
-    Apps *apps = s->pedalBoxSensors.apps;
-    AnalogObject *brakePressure = s->pedalBoxSensors.brakePressure;
-    Bspd *bspd = s->pedalBoxSensors.bspd;
-
-    appsBrakePlausibilityCheck(&(s->pedalboxFaults), apps->pin_data_1, apps->pin_data_2, brakePressure->pin_data_1, brakePressure->pin_data_2);
-    apps->checkVoltDiff(&(s->pedalboxFaults));
-    //bspd->checkBspdFault(&(s->pedalboxFaults));
+    return s->cansensors3;
 }
 
-PedalboxFaults StateMachine::getFaults() {
+CANLastSGauge StateMachine::getLastSGaugeCANSensors(){
     StateMachine *s = getInstance();
-    return s->pedalboxFaults;
+    return s->cansensors4;
 }
 
-void StateMachine::setBspdInfoTrue() {
+
+//4 read methods below read in data for each corresponding sensor/strain gauge
+void StateMachine::readSensorsAdcValues() {
     StateMachine *s = getInstance();
-    s->pedalboxFaults.bspdInfo = 1;
-    s->pedalboxFaults.bspdInfoHist = 1;
+    s->cansensors1.sensor1->readValues();
+    s->cansensors1.sensor2->readValues();
+    s->cansensors1.sensor3->readValues();
+    s->cansensors1.sensor4->readValues();
 }
 
-void StateMachine::setBspdInfoFalse() {
+void StateMachine::readLastSensorsAdcValues() {
     StateMachine *s = getInstance();
-    s->pedalboxFaults.bspdInfo = 0;
+
+    s->cansensors2.sensor5->readValues();
+    s->cansensors2.sensor6->readValues();
+    s->cansensors2.sensor7->readValues();
+    s->cansensors2.sensor8->readValues();
 }
 
-void StateMachine::setBspdCriticalTrue() {
+void StateMachine::readFirstSGaugesAdcValues() {
     StateMachine *s = getInstance();
-    s->pedalboxFaults.bspdCritical = 1;
-    s->pedalboxFaults.bspdCriticalHist = 1;
+
+    s->cansensors3.sensor9->readValues();
+    s->cansensors3.sensor10->readValues();
+    s->cansensors3.sensor11->readValues();
+    s->cansensors3.sensor12->readValues();
 }
 
-void StateMachine::setBspdCriticalFalse() {
+void StateMachine::readLastSGaugeAdcValues() {
     StateMachine *s = getInstance();
-    s->pedalboxFaults.bspdCritical = 0;
+
+    s->cansensors4.sensor13->readValues();
 }
-
-void StateMachine::setOverUnderVoltageInfoTrue() {
-    StateMachine *s = getInstance();
-    s->pedalboxFaults.overUnderVoltageInfo = 1;
-    s->pedalboxFaults.overUnderVoltageInfoHist = 1;
-}
-
-void StateMachine::setOverUnderVoltageInfoFalse() {
-    StateMachine *s = getInstance();
-    s->pedalboxFaults.overUnderVoltageInfo = 0;
-}
-
-void StateMachine::setOverUnderVoltageCriticalTrue() {
-    StateMachine *s = getInstance();
-    s->pedalboxFaults.overUnderVoltageCritical = 1;
-    s->pedalboxFaults.overUnderVoltageCriticalHist = 1;
-}
-
-void StateMachine::setOverUnderVoltageCriticalFalse() {
-    StateMachine *s = getInstance();
-    s->pedalboxFaults.overUnderVoltageCritical = 0;
-}*/
-
-
-
-

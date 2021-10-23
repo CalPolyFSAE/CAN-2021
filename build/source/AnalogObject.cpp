@@ -12,18 +12,19 @@
 
 using namespace BSP;
 
-//universal
+//AnalogObject class function definitions
+
+//AnalogObject constructor, sets adc and channel values
 AnalogObject::AnalogObject(ADC_Type *adc,int adcChannel){
     this->adc=adc;
     this->adcChannel=adcChannel;
 }
 
-// Universal
+//readValules() reads data from the pin associated to adc and channel values of the analogObject
+//the data is stored in pin_data_1
 void AnalogObject::readValues(){
     adc::ADC& add = adc::ADC::StaticClass();
-    //read data into each sensor's pin_data_1 attribute (for testing purposes)
     this->pin_data_1 = add.read(adc,adcChannel);
-    //this->pin_data_2 = add.read(data.adcNumber2, data.adcChannel2);
 }
 
 // Universal
