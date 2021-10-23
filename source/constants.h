@@ -1,7 +1,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-/*defining data variables for 8 sensors and 5 strain gauges below. for each sensor/strain gauge, define name, adc converter,
+/*definiting data variables for 8 sensors below. for each sensor, define name, adc converter,
 and channel to read data from */
 
 #define Sensor1_Name ""
@@ -36,6 +36,8 @@ and channel to read data from */
 #define Sensor8_ADC ADC2
 #define Sensor8_Channel 13
 
+// constants below are for the 5 strain gauges
+
 #define Sensor9_Name ""
 #define Sensor9_ADC ADC2
 #define Sensor9_Channel 13
@@ -60,6 +62,12 @@ and channel to read data from */
 //first 4 sensors = 701
 //last 4 sensors = 702
 //first 5 sgauges = 703
+
+
+
+
+#define CAN_BUS 0
+#define CAN_BAUD_RATE 1000000
 
 
 
