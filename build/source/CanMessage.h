@@ -4,14 +4,18 @@
 class CanMessage {
 public:
     static void sendTime();
-    static void sendSixtyHz();
-    static void sendHunHz();
+    //static void sendSixtyHz();
+    static void sendSensors();
+    static void sendFourSGauges();
+    static void sendLastSGauge();
 
 private:
     static CanMessage *getInstance();
     void sendTimeHelper();
-    void sendSixtyHzHelper();
-    void sendHunHzHelper();
+    //void sendSixtyHzHelper();
+    void sendSensorsHelper();
+    void sendFourSGaugesHelper();
+    void sendLastSGaugeHelper();
     CanMessage();
     void initCan();
     static CanMessage* instance;
