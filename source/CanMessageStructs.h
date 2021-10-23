@@ -18,7 +18,7 @@ typedef struct
     uint16_t AnalogData6;
     uint16_t AnalogData7;
     uint16_t AnalogData8;
-}LastSensorStruct;
+}LastSensorsStruct;
 
 typedef struct 
 {

@@ -46,19 +46,20 @@ void CanMessage::sendTimeHelper(){
 }
 
 void CanMessage::sendSensorsHelper(){
-    StateMachine *s = StateMachine::getInstance();
-    AnalogObject canSensors[8] = StateMachine::getSensors();
+    CANFirstSensors cansensors1 = StateMachine::getFirstSensorsCANSensors();
+    CANLastSensors cansensors2 = StateMachine::getLastSensorsCANSensors();
     FirstSensorsStruct canStruct;
-    LastSensorStruct canLastStruct;
+    LastSensorsStruct canLastStruct;
 
-    canStruct.AnalogData1 = canSensors[0]->pin_data_1;
-    canStruct.AnalogData2 = canSensors[1]->pin_data_1;
-    canStruct.AnalogData3 = canSensors[2]->pin_data_1;
-    canStruct.AnalogData4 = canSensors[3]->pin_data_1;;
-    canLastStruct.AnalogData5 = canSensors[4]->pin_data_1;
-    canLastStruct.AnalogData6 = canSensors[5]->pin_data_1;
-    canLastStruct.AnalogData7 = canSensors[6]->pin_data_1;
-    canLastStruct.AnalogData8 = canSensors[7]->pin_data_1;
+    canStruct.AnalogData1 = cansensors1.sensor1->pin_data_1;
+    canStruct.AnalogData2 = cansensors1.sensor2->pin_data_1;
+    canStruct.AnalogData3 = cansensors1.sensor3->pin_data_1;
+    canStruct.AnalogData4 = cansensors1.sensor4->pin_data_1;;
+
+    canLastStruct.AnalogData5 = cansensors2.sensor5->pin_data_1;
+    canLastStruct.AnalogData6 = cansensors2.sensor6->pin_data_1;
+    canLastStruct.AnalogData7 = cansensors2.sensor7->pin_data_1;
+    canLastStruct.AnalogData8 = cansensors2.sensor8->pin_data_1;
     
 
     can::CANlight &can = can::CANlight::StaticClass();
@@ -66,7 +67,7 @@ void CanMessage::sendSensorsHelper(){
     frame1.id = CAN_ID_TIME+1;
     frame1.ext = 1;
     frame1.dlc = 8;
-    memcpy(frame1.data, &canStruct, sizeof(canSensors)/2);
+    memcpy(frame1.data, &canStruct, sizeof(canStruct));
     can.tx(CAN_BUS, frame1);
 
     can::CANlight &can1 = can::CANlight::StaticClass();
@@ -74,45 +75,43 @@ void CanMessage::sendSensorsHelper(){
     frame2.id = CAN_ID_TIME+2;
     frame2.ext = 1;
     frame2.dlc = 8;
-    memcpy(frame2.data, &canLastStruct, sizeof(canSensors)/2);
+    memcpy(frame2.data, &canLastStruct, sizeof(canLastStruct));
     can.tx(CAN_BUS, frame2);
 
     //can::CANlight::frame fHun = can.readrx(1);
 }
 
 void CanMessage::sendFourSGaugesHelper(){
-    StateMachine *s = StateMachine::getInstance();
-    AnalogObject canSGauges[5] = StateMachine::getSGauges();
+    CANFourSGauges cansensors3 = StateMachine::getFourSGaugesCANSensors();
     FourSGaugeStruct canFourSGaugesStruct;
 
-    canFourSGaugesStruct.AnalogData9 = canSGauges[0]->pin_data_1;
-    canFourSGaugesStruct.AnalogData10 = canSGauges[1]->pin_data_1;
-    canFourSGaugesStruct.AnalogData11 = canSGauges[2]->pin_data_1;
-    canFourSGaugesStruct.AnalogData12 = canSGauges[3]->pin_data_1;
+    canFourSGaugesStruct.AnalogData9 = cansensors3.sensor9->pin_data_1;
+    canFourSGaugesStruct.AnalogData10 = cansensors3.sensor10->pin_data_1;
+    canFourSGaugesStruct.AnalogData11 = cansensors3.sensor11->pin_data_1;
+    canFourSGaugesStruct.AnalogData12 = cansensors3.sensor12->pin_data_1;
 
     can::CANlight &can = can::CANlight::StaticClass();
     can::CANlight::frame frame;
     frame.id = CAN_ID_TIME+3;
     frame.ext = 1;
     frame.dlc = 8;
-    memcpy(frame.data, &canFourSGaugesStruct, sizeof(canSGauges)*.8);
+    memcpy(frame.data, &canFourSGaugesStruct, sizeof(canFourSGaugesStruct));
     can.tx(CAN_BUS, frame);
     can::CANlight::frame fHun = can.readrx(1);
 }
 
 void CanMessage::sendLastSGaugeHelper(){
-    StateMachine *s = StateMachine::getInstance();
-    AnalogObject canLastSGauge[5] = StateMachine::getSGauges();
+    CANLastSGauge cansensors4 = StateMachine::getLastSGaugeCANSensors();
     LastSGaugeStruct canLastSGaugeStruct;
 
-    canLastSGaugeStruct.AnalogData13 = canLastSGauge[4]->pin_data_1;
+    canLastSGaugeStruct.AnalogData13 = cansensors4.sensor13->pin_data_1;
 
     can::CANlight &can = can::CANlight::StaticClass();
     can::CANlight::frame frame;
     frame.id = CAN_ID_TIME+4;
     frame.ext = 1;
     frame.dlc = 8;
-    memcpy(frame.data, &canLastSGaugeStruct, sizeof(canLastSGauge)*.2);
+    memcpy(frame.data, &canLastSGaugeStruct, sizeof(cansensors4));
     can.tx(CAN_BUS, frame);
     can::CANlight::frame fHun = can.readrx(1);
 }

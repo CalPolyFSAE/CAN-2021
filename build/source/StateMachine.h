@@ -5,7 +5,6 @@
 //#include "Apps.h"
 //#include "Bspd.h"
 
-/*
 typedef struct{
     //AnalogObject *brakePressure;
     //AnalogObject *throttle;
@@ -38,7 +37,6 @@ typedef struct{
 typedef struct{
     AnalogObject *sensor13;
 }CANLastSGauge;
-*/
 
 
 
@@ -49,9 +47,6 @@ public:
     static StateMachine *getInstance();
     static AnalogObject * getSensors();
     static AnalogObject *  getSGauges();
-    static AnalogObject ADC_sensors[8];
-    static AnalogObject sgauges[5];
-    /*
     static void readFirstSensorsAdcValues();
     static void readLastSensorsAdcValues();
     static void readFirstSGaugesAdcValues();
@@ -61,7 +56,6 @@ public:
     static CANLastSensors getLastSensorsCANSensors();
     static CANFourSGauges getFourSGaugesCANSensors();
     static CANLastSGauge getLastSGaugeCANSensors();
-    */
     static void setBspdInfoTrue();
     static void setBspdInfoFalse();
     static void setBspdCriticalTrue();
@@ -76,10 +70,10 @@ private:
     StateMachine();
     static StateMachine *instance;
 
-    /*CANFirstSensors cansensors1;
+    CANFirstSensors cansensors1;
     CANLastSensors cansensors2;
     CANFourSGauges cansensors3;
-    CANLastSGauge cansensors4;*/
+    CANLastSGauge cansensors4;
     //PedalboxFaults pedalboxFaults;
 };
 

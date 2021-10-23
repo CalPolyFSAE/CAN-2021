@@ -35,26 +35,16 @@ StateMachine::StateMachine() {
     AnalogObject *sensor12 = new AnalogObject(Sensor12_ADC,Sensor12_Channel);
     AnalogObject *sensor13 = new AnalogObject(Sensor13_ADC,Sensor13_Channel);
     
+    this->cansensors1 = {sensor1,sensor2,sensor3,sensor4};
+    this->cansensors2 = {sensor5,sensor6,sensor7,sensor8};
+    this->cansensors3 = {sensor9,sensor10,sensor11,sensor12};
+    this->cansensors4 = {sensor13};
 
-   this->ADC_sensors = {sensor1,sensor2,sensor3,sensor4,sensor5,sensor6,sensor7,sensor8};
-   this->sgauges={sensor9,sensor10,sensor11,sensor12,sensor13};
-
-
-    
-
-    
     //Apps *apps = new Apps(appsData);
 
     //BspdData bspdData = (BspdData){THROTTLE_ADC_1, THROTTLE_CHANNEL_1, BRAKE_PRESSURE_1_ADC, BRAKE_PRESSURE_1_CHANNEL,
     //                               BRAKE_PRESSURE_2_ADC, BRAKE_PRESSURE_2_CHANNEL};
     //Bspd *bspd = new Bspd(bspdData);
-
-    /*
-    this->cansensors1 = {sensor1,sensor2,sensor3,sensor4};
-    this->cansensors2 = {sensor5,sensor6,sensor7,sensor8};
-    this->cansensors3 = {sensor9,sensor10,sensor11,sensor12};
-    this->cansensors4 = {sensor13};
-    */
 }
 
 StateMachine *StateMachine::getInstance() {
@@ -64,7 +54,6 @@ StateMachine *StateMachine::getInstance() {
     return instance;
 }
 
-/*
 CANFirstSensors StateMachine::getFirstSensorsCANSensors(){
     StateMachine *s = getInstance();
     return s->cansensors1;
@@ -84,42 +73,16 @@ CANLastSGauge StateMachine::getLastSGaugeCANSensors(){
     StateMachine *s = getInstance();
     return s->cansensors4;
 }
-*/
 
-AnalogObject *StateMachine::getSensors()
-{
-    StateMachine *s = getInstance();
-    return s->ADC_sensors;
-}
-
-AnalogObject * StateMachine::getSGauges()
-{
-    StateMachine *s = getInstance();
-    return s->sgauges;
-}
 
 void StateMachine::readSensorsAdcValues() {
     StateMachine *s = getInstance();
-
-    for(int i=0;i<ADC_sensors.size();i++)
-    {
-        s->ADC_sensors[i]->readValues();
-    }
-
-    for(int i=0;i<sgauges.size();i++)
-    {
-        s->sgauges[i]->readValues();
-    }
-
-    /*
     s->cansensors1.sensor1->readValues();
     s->cansensors1.sensor2->readValues();
     s->cansensors1.sensor3->readValues();
     s->cansensors1.sensor4->readValues();
-    */
 }
 
-/*
 void StateMachine::readLastSensorsAdcValues() {
     StateMachine *s = getInstance();
 
@@ -142,7 +105,7 @@ void StateMachine::readLastSGaugeAdcValues() {
     StateMachine *s = getInstance();
 
     s->cansensors4.sensor13->readValues();
-}*/
+}
 
 /*
 void StateMachine::checkFaults() {

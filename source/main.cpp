@@ -38,12 +38,10 @@ void taskReadHunHzValuesSendCanMessages(void *){
 		CanMessage::sendSensors();
 		CanMessage::sendFourSGauges();
 		CanMessage::sendLastSGauge();
-		/*
         CANFirstSensors sensorValues1 = StateMachine::getFirstSensorsCANSensors();
 		CANLastSensors sensorValues2 = StateMachine::getLastSensorsCANSensors();
 		CANFourSGauges sensorValues3 = StateMachine::getFourSGaugesCANSensors();
 		CANLastSGauge sensorValues4 = StateMachine::getLastSGaugeCANSensors();
-		*/
 		vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS((1/.1)));
 		count++;
 		if(count == 100){
