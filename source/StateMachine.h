@@ -17,7 +17,7 @@ typedef struct{
     AnalogObject *sensor7;
     AnalogObject *sensor8;
     //Apps *apps;
-    //Bspd *bspd;
+    //Bspd *bspd
 }CANSensors;
 
 class StateMachine {
