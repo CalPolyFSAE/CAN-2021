@@ -1,7 +1,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-/*definiting data variables for 8 sensors below. for each sensor, define name, adc converter,
+/*definiting data variables for 8 sensors and 5 strain  gauges below. for each sensor/strain gauge, define name, adc converter,
 and channel to read data from */
 
 #define Sensor1_Name ""
@@ -58,6 +58,7 @@ and channel to read data from */
 #define Sensor13_ADC ADC2
 #define Sensor13_Channel 13
 
+//priority of our project -- higher hex value means lower priority project (ours is low priority)
 #define CAN_ID_TIME  0x0700
 //first 4 sensors = 701
 //last 4 sensors = 702
