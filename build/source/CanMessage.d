@@ -1,6 +1,5 @@
 build/source/CanMessage.o: build/source/CanMessage.cpp \
- build/source/CanMessage.h rtos/include/FreeRTOS.h \
- source/FreeRTOSConfig.h \
+ rtos/include/FreeRTOS.h source/FreeRTOSConfig.h \
  /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/CMSIS/MKE18F16.h \
  /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/CMSIS/core_cm4.h \
  /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/CMSIS/cmsis_version.h \
@@ -20,8 +19,7 @@ build/source/CanMessage.o: build/source/CanMessage.cpp \
  /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/CMSIS/MKE18F16_features.h \
  /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/drivers/fsl_clock.h \
  build/source/constants.h build/source/StateMachine.h \
- build/source/AnalogObject.h build/source/CanMessageStructs.h
-build/source/CanMessage.h:
+ build/source/AnalogObject.h build/source/canmessagestructs.h
 rtos/include/FreeRTOS.h:
 source/FreeRTOSConfig.h:
 /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/CMSIS/MKE18F16.h:
@@ -49,4 +47,4 @@ rtos/include/list.h:
 build/source/constants.h:
 build/source/StateMachine.h:
 build/source/AnalogObject.h:
-build/source/CanMessageStructs.h:
+build/source/canmessagestructs.h:

@@ -21,10 +21,12 @@ build/source/main.o: build/source/main.cpp rtos/include/FreeRTOS.h \
  /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/CMSIS/MKE18F16_features.h \
  /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/drivers/fsl_clock.h \
  /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/drivers/fsl_clock.h \
- build/source/StateMachine.h build/source/CanMessage.h board/pin_mux.h \
- board/clock_config.h \
- /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/drivers/fsl_common.h \
- build/source/constants.h
+ build/source/StateMachine.h build/source/CanMessage.h \
+ build/source/CanMessageStructs.h \
+ /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/lib/can.h \
+ /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/drivers/fsl_flexcan.h \
+ build/source/constants.h board/pin_mux.h board/clock_config.h \
+ /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/drivers/fsl_common.h
 rtos/include/FreeRTOS.h:
 source/FreeRTOSConfig.h:
 /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/CMSIS/MKE18F16.h:
@@ -57,7 +59,10 @@ build/source/AnalogObject.h:
 /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/drivers/fsl_clock.h:
 build/source/StateMachine.h:
 build/source/CanMessage.h:
+build/source/CanMessageStructs.h:
+/Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/lib/can.h:
+/Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/drivers/fsl_flexcan.h:
+build/source/constants.h:
 board/pin_mux.h:
 board/clock_config.h:
 /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/drivers/fsl_common.h:
-build/source/constants.h:

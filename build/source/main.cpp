@@ -13,16 +13,15 @@
 #include "clock_config.h"
 #include "constants.h"
 
-
-
 using namespace BSP;
 
-void taskReadHunHzValuesSendCanMessages(void *){
-    TickType_t xLastWakeTime;
+//SAS
+void taskReadHunHzValuesSendCanMessages(void *)
+{
+	TickType_t xLastWakeTime;
 	int end;
 	int duration;
 	int count = 0;
-
 
 	/*
 	Infinite loop below for reading from 100 HZ sensors. count used to keep track of number of current
@@ -30,41 +29,40 @@ void taskReadHunHzValuesSendCanMessages(void *){
 	get number of seconds task has been running. Since if condition is set to count==100, duration should == 1 second
 	for the function to be correctly reading at 100 HZ
 	*/
-	for(;;){
+	for (;;)
+	{
 		xLastWakeTime = xTaskGetTickCount();
-        StateMachine::readSensorsAdcValues();
-    	StateMachine::readLastSensorsAdcValues();
-    	StateMachine::readFirstSGaugesAdcValues();
-     	StateMachine::readLastSGaugeAdcValues();
-        CanMessage::sendTime();
-		CanMessage::sendSensors();
-		CanMessage::sendFourSGauges();
-		CanMessage::sendLastSGauge();
-        CANFirstSensors sensorValues1 = StateMachine::getFirstSensorsCANSensors();
+		StateMachine::readSensorsAdcValues();
+		StateMachine::readLastSensorsAdcValues();
+		StateMachine::readFirstSGaugesAdcValues();
+		StateMachine::readLastSGaugeAdcValues();
+		sendTime();
+		sendSensors();
+		sendFourSGauges();
+		sendLastSGauge();
+		CANFirstSensors sensorValues1 = StateMachine::getFirstSensorsCANSensors();
 		CANLastSensors sensorValues2 = StateMachine::getLastSensorsCANSensors();
 		CANFourSGauges sensorValues3 = StateMachine::getFourSGaugesCANSensors();
 		CANLastSGauge sensorValues4 = StateMachine::getLastSGaugeCANSensors();
-		vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS((1/.1)));
+		vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS((1 / .1)));
 		count++;
-		if(count == 100){
-			end=xTaskGetTickCount();
-			duration=(end)/configTICK_RATE_HZ;
+		if (count == 100)
+		{
+			end = xTaskGetTickCount();
+			duration = (end) / configTICK_RATE_HZ;
 		}
-
-    }
+	}
 }
 
-
-int main( void )
+int main(void)
 {
 
-    BOARD_InitBootClocks();
-    BOARD_InitBootPins();
-    adc::ADC::ConstructStatic(NULL);
+	BOARD_InitBootClocks();
+	BOARD_InitBootPins();
+	adc::ADC::ConstructStatic(NULL);
 
 	// Create a task to read 100 Hz values for sensors and strain gauges
 	xTaskCreate(taskReadHunHzValuesSendCanMessages, "taskReadHunHzValuesSendCanMessages", 1000, NULL, 2, NULL);
-
 
 	/* Start the scheduler. */
 	vTaskStartScheduler();
@@ -73,12 +71,13 @@ int main( void )
 	//for( ;; );
 }
 
-extern "C" {
-
-/*-----------------------------------------------------------*/
-void vApplicationMallocFailedHook( void )
+extern "C"
 {
-	/* vApplicationMallocFailedHook() will only be called if
+
+	/*-----------------------------------------------------------*/
+	void vApplicationMallocFailedHook(void)
+	{
+		/* vApplicationMallocFailedHook() will only be called if
 	configUSE_MALLOC_FAILED_HOOK is set to 1 in FreeRTOSConfig.h.  It is a hook
 	function that will get called if a call to pvPortMalloc() fails.
 	pvPortMalloc() is called internally by the kernel whenever a task, queue,
@@ -88,14 +87,15 @@ void vApplicationMallocFailedHook( void )
 	FreeRTOSConfig.h, and the xPortGetFreeHeapSize() API function can be used
 	to query the size of free heap space that remains (although it does not
 	provide information on how the remaining heap might be fragmented). */
-	taskDISABLE_INTERRUPTS();
-	for( ;; );
-}
-/*-----------------------------------------------------------*/
+		taskDISABLE_INTERRUPTS();
+		for (;;)
+			;
+	}
+	/*-----------------------------------------------------------*/
 
-void vApplicationIdleHook( void )
-{
-	/* vApplicationIdleHook() will only be called if configUSE_IDLE_HOOK is set
+	void vApplicationIdleHook(void)
+	{
+		/* vApplicationIdleHook() will only be called if configUSE_IDLE_HOOK is set
 	to 1 in FreeRTOSConfig.h.  It will be called on each iteration of the idle
 	task.  It is essential that code added to this hook function never attempts
 	to block in any way (for example, call xQueueReceive() with a block time
@@ -104,30 +104,30 @@ void vApplicationIdleHook( void )
 	important that vApplicationIdleHook() is permitted to return to its calling
 	function, because it is the responsibility of the idle task to clean up
 	memory allocated by the kernel to any task that has since been deleted. */
-}
-/*-----------------------------------------------------------*/
+	}
+	/*-----------------------------------------------------------*/
 
-void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName )
-{
-	( void ) pcTaskName;
-	( void ) pxTask;
+	void vApplicationStackOverflowHook(TaskHandle_t pxTask, char *pcTaskName)
+	{
+		(void)pcTaskName;
+		(void)pxTask;
 
-	/* Run time stack overflow checking is performed if
+		/* Run time stack overflow checking is performed if
 	configCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2.  This hook
 	function is called if a stack overflow is detected. */
-	taskDISABLE_INTERRUPTS();
-	for( ;; );
-}
-/*-----------------------------------------------------------*/
+		taskDISABLE_INTERRUPTS();
+		for (;;)
+			;
+	}
+	/*-----------------------------------------------------------*/
 
-void vApplicationTickHook( void )
-{
-	/* This function will be called by each tick interrupt if
+	void vApplicationTickHook(void)
+	{
+		/* This function will be called by each tick interrupt if
 	configUSE_TICK_HOOK is set to 1 in FreeRTOSConfig.h.  User code can be
 	added here, but the tick hook is called from an interrupt context, so
 	code must not attempt to block, and only the interrupt safe FreeRTOS API
 	functions can be used (those that end in FromISR()). */
-}
-/*-----------------------------------------------------------*/
-
+	}
+	/*-----------------------------------------------------------*/
 }

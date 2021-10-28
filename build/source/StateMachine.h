@@ -4,41 +4,43 @@
 #include "AnalogObject.h"
 
 // 4 StateMachine objects, one for first four sensors, one for last 4 sensors, one for first 4 strain gauges, 1 for last strain gauge
-typedef struct{
+typedef struct
+{
     AnalogObject *sensor1;
     AnalogObject *sensor2;
     AnalogObject *sensor3;
-    AnalogObject *sensor4; 
-}CANFirstSensors;
+    AnalogObject *sensor4;
+} CANFirstSensors;
 
-typedef struct{
+typedef struct
+{
     AnalogObject *sensor5;
     AnalogObject *sensor6;
     AnalogObject *sensor7;
     AnalogObject *sensor8;
-}CANLastSensors;
+} CANLastSensors;
 
-typedef struct{
+typedef struct
+{
     AnalogObject *sensor9;
     AnalogObject *sensor10;
     AnalogObject *sensor11;
     AnalogObject *sensor12;
-}CANFourSGauges;
+} CANFourSGauges;
 
-typedef struct{
+typedef struct
+{
     AnalogObject *sensor13;
-}CANLastSGauge;
-
-
-
+} CANLastSGauge;
 
 // Declaring class vars
-class StateMachine {
+class StateMachine
+{
 public:
     static void readSensorsAdcValues();
     static StateMachine *getInstance();
-    static AnalogObject * getSensors();
-    static AnalogObject *  getSGauges();
+    static AnalogObject *getSensors();
+    static AnalogObject *getSGauges();
     static void readLastSensorsAdcValues();
     static void readFirstSGaugesAdcValues();
     static void readLastSGaugeAdcValues();
@@ -46,6 +48,7 @@ public:
     static CANLastSensors getLastSensorsCANSensors();
     static CANFourSGauges getFourSGaugesCANSensors();
     static CANLastSGauge getLastSGaugeCANSensors();
+
 private:
     StateMachine();
     static StateMachine *instance;
@@ -55,6 +58,5 @@ private:
     CANFourSGauges cansensors3;
     CANLastSGauge cansensors4;
 };
-
 
 #endif //STATEMACHINE_H
