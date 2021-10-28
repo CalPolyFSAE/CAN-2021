@@ -36,7 +36,7 @@ and channel to read data from */
 #define Sensor8_ADC ADC2
 #define Sensor8_Channel 13
 
-// constants below are for the 5 strain gauges
+// Constants below are for the 5 strain gauges
 
 #define Sensor9_Name ""
 #define Sensor9_ADC ADC2
@@ -58,11 +58,11 @@ and channel to read data from */
 #define Sensor13_ADC ADC2
 #define Sensor13_Channel 13
 
-//priority of our project -- higher hex value means lower priority project (ours is low priority)
+// Priority of our project -- higher hex value means lower priority project (ours is low priority)
 #define CAN_ID_TIME  0x0700
-//first 4 sensors = 701
-//last 4 sensors = 702
-//first 5 sgauges = 703
+// First 4 sensors = 701
+// Last 4 sensors = 702
+// First 5 sgauges = 703
 
 
 

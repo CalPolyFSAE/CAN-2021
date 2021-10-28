@@ -2,7 +2,7 @@
 #define CANMESSAGE_H
 
 
-//CanMessage class declaration
+// CanMessage class declaration
 class CanMessage {
 public:
     static void sendTime();

@@ -104,7 +104,7 @@ void CanMessage::sendFourSGaugesHelper(){
     can::CANlight::frame fHun = can.readrx(1);
 }
 
-//Sends CAN message for the data of the fifth strain gauge
+// Sends CAN message for the data of the fifth strain gauge
 void CanMessage::sendLastSGaugeHelper(){
     CANLastSGauge cansensors4 = StateMachine::getLastSGaugeCANSensors();
     LastSGaugeStruct canLastSGaugeStruct;
@@ -121,7 +121,7 @@ void CanMessage::sendLastSGaugeHelper(){
     can::CANlight::frame fHun = can.readrx(1);
 }
 
-//The following are public functions which call private helper functions to send CAN messages
+// The following are public functions which call private helper functions to send CAN messages
 
 void CanMessage::sendTime() {
     CanMessage *c = CanMessage::getInstance();

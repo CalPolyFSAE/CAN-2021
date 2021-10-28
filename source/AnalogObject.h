@@ -12,7 +12,7 @@ protected:
 
 
 public:
-    //function definitions
+    // Function definitions
     AnalogObject(ADC_Type *adc,int adcChannel);
     void readValues();
     static void initADC();

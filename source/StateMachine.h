@@ -3,12 +3,12 @@
 
 #include "AnalogObject.h"
 
-//4 StateMachine objects, one for first four sensors, one for last 4 sensors, one for first 4 strain gauges, 1 for last strain gauge
+// 4 StateMachine objects, one for first four sensors, one for last 4 sensors, one for first 4 strain gauges, 1 for last strain gauge
 typedef struct{
     AnalogObject *sensor1;
     AnalogObject *sensor2;
     AnalogObject *sensor3;
-    AnalogObject *sensor4;
+    AnalogObject *sensor4; 
 }CANFirstSensors;
 
 typedef struct{
@@ -32,7 +32,7 @@ typedef struct{
 
 
 
-//declaring class vars
+// Declaring class vars
 class StateMachine {
 public:
     static void readSensorsAdcValues();

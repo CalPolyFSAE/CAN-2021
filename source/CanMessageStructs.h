@@ -3,7 +3,7 @@
 #define CANMESSAGESTRUCTS_H
 #include "MKE18F16.h"
 
-//the struct below is for the 8 sensors and 5 strain gauges. Allocating 16 bits (2 bytes) for each sensor (each voltage message/reading takes in 12 bits.)
+// The struct below is for the 8 sensors and 5 strain gauges. Allocating 16 bits (2 bytes) for each sensor (each voltage message/reading takes in 12 bits.)
 
 typedef struct{
     uint16_t AnalogData1;

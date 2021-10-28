@@ -16,7 +16,7 @@
 
 
 using namespace BSP;
- 
+
 void taskReadHunHzValuesSendCanMessages(void *){
     TickType_t xLastWakeTime;
 	int end;
@@ -25,8 +25,8 @@ void taskReadHunHzValuesSendCanMessages(void *){
 
 
 	/*
-	infinite loop below for reading from 100 HZ sensors. count used to keep track of number of current
-	task cycles. end used to gather number of ticks since task started. Divide end by configTICK_RATE_HZ (stored in duration) to 
+	Infinite loop below for reading from 100 HZ sensors. count used to keep track of number of current
+	task cycles. end used to gather number of ticks since task started. Divide end by configTICK_RATE_HZ (stored in duration) to
 	get number of seconds task has been running. Since if condition is set to count==100, duration should == 1 second
 	for the function to be correctly reading at 100 HZ
 	*/
@@ -49,8 +49,6 @@ void taskReadHunHzValuesSendCanMessages(void *){
 		if(count == 100){
 			end=xTaskGetTickCount();
 			duration=(end)/configTICK_RATE_HZ;
-			//duration = endtime-startime;
-			//dur = (double)duration/CLOCKS_PER_SEC;
 		}
 
     }
@@ -59,15 +57,15 @@ void taskReadHunHzValuesSendCanMessages(void *){
 
 int main( void )
 {
-    
+
     BOARD_InitBootClocks();
     BOARD_InitBootPins();
     adc::ADC::ConstructStatic(NULL);
-    
-	//create a task to read 100 Hz values for sensors and strain gauges
+
+	// Create a task to read 100 Hz values for sensors and strain gauges
 	xTaskCreate(taskReadHunHzValuesSendCanMessages, "taskReadHunHzValuesSendCanMessages", 1000, NULL, 2, NULL);
-    
-    
+
+
 	/* Start the scheduler. */
 	vTaskStartScheduler();
 
