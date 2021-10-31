@@ -9,7 +9,8 @@ build/source/CanMessage.o: build/source/CanMessage.cpp \
  /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/CMSIS/core_cm4.h \
  rtos/include/projdefs.h rtos/include/portable.h \
  rtos/include/deprecated_definitions.h rtos/portable/ARM_CM4F/portmacro.h \
- rtos/include/mpu_wrappers.h rtos/include/task.h rtos/include/list.h \
+ rtos/include/mpu_wrappers.h build/source/CanMessage.h \
+ rtos/include/task.h rtos/include/list.h \
  /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/lib/can.h \
  /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/System/Service.h \
  /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/drivers/fsl_flexcan.h \
@@ -19,7 +20,7 @@ build/source/CanMessage.o: build/source/CanMessage.cpp \
  /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/CMSIS/MKE18F16_features.h \
  /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/drivers/fsl_clock.h \
  build/source/constants.h build/source/StateMachine.h \
- build/source/AnalogObject.h build/source/canmessagestructs.h
+ build/source/AnalogObject.h build/source/CanMessageStructs.h
 rtos/include/FreeRTOS.h:
 source/FreeRTOSConfig.h:
 /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/CMSIS/MKE18F16.h:
@@ -34,6 +35,7 @@ rtos/include/portable.h:
 rtos/include/deprecated_definitions.h:
 rtos/portable/ARM_CM4F/portmacro.h:
 rtos/include/mpu_wrappers.h:
+build/source/CanMessage.h:
 rtos/include/task.h:
 rtos/include/list.h:
 /Users/nakul.nayak/Documents/GitHub/FSAE/Projects/MKELibrary/lib/can.h:
@@ -47,4 +49,4 @@ rtos/include/list.h:
 build/source/constants.h:
 build/source/StateMachine.h:
 build/source/AnalogObject.h:
-build/source/canmessagestructs.h:
+build/source/CanMessageStructs.h:

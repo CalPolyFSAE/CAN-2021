@@ -15,7 +15,6 @@
 
 using namespace BSP;
 
-//SAS
 void taskReadHunHzValuesSendCanMessages(void *)
 {
 	TickType_t xLastWakeTime;
@@ -60,6 +59,7 @@ int main(void)
 	BOARD_InitBootClocks();
 	BOARD_InitBootPins();
 	adc::ADC::ConstructStatic(NULL);
+	initCan();
 
 	// Create a task to read 100 Hz values for sensors and strain gauges
 	xTaskCreate(taskReadHunHzValuesSendCanMessages, "taskReadHunHzValuesSendCanMessages", 1000, NULL, 2, NULL);
