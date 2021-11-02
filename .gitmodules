@@ -1,3 +1,6 @@
 [submodule "CanMessageStructs"]
 	path = CanMessageStructs
 	url = https://github.com/CalPolyFSAE/CanMessageStructs
+[submodule "source/CanMessageStructs"]
+	path = source/CanMessageStructs
+	url = https://github.com/CalPolyFSAE/CanMessageStructs.git

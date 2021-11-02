@@ -8,7 +8,7 @@
 
 using namespace BSP;
 
-//initializes various CAN settings
+// initializes various CAN settings
 void initCan()
 {
     can::can_config config;
@@ -24,8 +24,8 @@ void initCan()
     can.init(1, &canx_config);
 }
 
-//Helper function which sends a time value as a Can Message for each instance of logged data
-void sendTimeHelper()
+// Helper function which sends a time value as a Can Message for each instance of logged data
+void sendTime()
 {
     can::CANlight &can = can::CANlight::StaticClass();
     can::CANlight::frame frame;
@@ -37,8 +37,8 @@ void sendTimeHelper()
     can.tx(CAN_BUS, frame);
 }
 
-//Helper function which sends CAN message of 8 sensor values
-void sendSensorsHelper()
+// Helper function which sends CAN message of 8 sensor values
+void sendSensors()
 {
     CANFirstSensors cansensors1 = StateMachine::getFirstSensorsCANSensors();
     CANLastSensors cansensors2 = StateMachine::getLastSensorsCANSensors();
@@ -73,9 +73,9 @@ void sendSensorsHelper()
     can.tx(CAN_BUS, frame2);
 }
 
-//Sends CAN message of the first 4 gauges. limited to 4 data values per Can message.
-// (CAN message data field limited to 8 bytes, each data value is 2 bytes)
-void sendFourSGaugesHelper()
+// Sends CAN message of the first 4 gauges. limited to 4 data values per Can message.
+//  (CAN message data field limited to 8 bytes, each data value is 2 bytes)
+void sendFourSGauges()
 {
     CANFourSGauges cansensors3 = StateMachine::getFourSGaugesCANSensors();
     FourSGaugeStruct canFourSGaugesStruct;
@@ -96,7 +96,7 @@ void sendFourSGaugesHelper()
 }
 
 // Sends CAN message for the data of the fifth strain gauge
-void sendLastSGaugeHelper()
+void sendLastSGauge()
 {
     CANLastSGauge cansensors4 = StateMachine::getLastSGaugeCANSensors();
     LastSGaugeStruct canLastSGaugeStruct;
@@ -114,23 +114,3 @@ void sendLastSGaugeHelper()
 }
 
 // The following are public functions which call private helper functions to send CAN messages
-
-void sendTime()
-{
-    sendTimeHelper();
-}
-
-void sendSensors()
-{
-    sendSensorsHelper();
-}
-
-void sendFourSGauges()
-{
-    sendFourSGaugesHelper();
-}
-
-void sendLastSGauge()
-{
-    sendLastSGaugeHelper();
-}

@@ -1,5 +1,5 @@
-#ifndef ANALOGOBJECT
-#define ANALOGOBJECT
+#ifndef ANALOGOBJECT_H
+#define ANALOGOBJECT_H
 
 #include "MKE18F16.h"
 
