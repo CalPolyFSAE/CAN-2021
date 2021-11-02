@@ -4,7 +4,7 @@
 #include "can.h"
 #include "constants.h"
 #include "StateMachine.h"
-#include "CanMessageStructs.h"
+#include "canmessagestructs.h"
 
 using namespace BSP;
 

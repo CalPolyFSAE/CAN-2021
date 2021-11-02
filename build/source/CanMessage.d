@@ -20,7 +20,7 @@ build/source/CanMessage.o: build/source/CanMessage.cpp \
  /mnt/c/users/seena/documents/Github/MKELibrary/CMSIS/MKE18F16_features.h \
  /mnt/c/users/seena/documents/Github/MKELibrary/drivers/fsl_clock.h \
  build/source/constants.h build/source/StateMachine.h \
- build/source/AnalogObject.h build/source/CanMessageStructs.h
+ build/source/AnalogObject.h source/CanMessageStructs/canmessagestructs.h
 rtos/include/FreeRTOS.h:
 source/FreeRTOSConfig.h:
 /mnt/c/users/seena/documents/Github/MKELibrary/CMSIS/MKE18F16.h:
@@ -49,4 +49,4 @@ rtos/include/list.h:
 build/source/constants.h:
 build/source/StateMachine.h:
 build/source/AnalogObject.h:
-build/source/CanMessageStructs.h:
+source/CanMessageStructs/canmessagestructs.h:

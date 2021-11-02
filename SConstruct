@@ -49,6 +49,7 @@ env['CXXFLAGS'] = '-O0 -g -DDEBUG -Wall \
 
 includes = [
     'source',
+    'source/CanMessageStructs',
     'board',
     BSP_PATH+'CMSIS',
     BSP_PATH+'drivers',
