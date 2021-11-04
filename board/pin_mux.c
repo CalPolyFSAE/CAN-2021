@@ -7,11 +7,11 @@
 /*
  * TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 !!GlobalInfo
-product: Pins v5.0
+product: Pins v10.0
 processor: MKE18F512xxx16
 package_id: MKE18F512VLH16
 mcu_data: ksdk2_0
-processor_version: 5.0.0
+processor_version: 10.0.0
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -36,7 +36,24 @@ void BOARD_InitBootPins(void)
  * TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 BOARD_InitPins:
 - options: {callFromInitBoot: 'true', coreID: core0, enableClock: 'true'}
-- pin_list: []
+- pin_list:
+  - {pin_num: '29', peripheral: ADC0, signal: 'SE, 13', pin_signal: ADC0_SE13/ACMP2_IN4/PTC15/FTM1_CH3}
+  - {pin_num: '30', peripheral: ADC0, signal: 'SE, 12', pin_signal: ADC0_SE12/ACMP2_IN5/PTC14/FTM1_CH2}
+  - {pin_num: '31', peripheral: ADC0, signal: 'SE, 7', pin_signal: ADC0_SE7/PTB3/FTM1_CH1/LPSPI0_SIN/FTM1_QD_PHA/TRGMUX_IN2}
+  - {pin_num: '32', peripheral: ADC0, signal: 'SE, 6', pin_signal: ADC0_SE6/PTB2/FTM1_CH0/LPSPI0_SCK/FTM1_QD_PHB/TRGMUX_IN3}
+  - {pin_num: '33', peripheral: ADC0, signal: 'SE, 5', pin_signal: ADC0_SE5/ADC1_SE15/PTB1/LPUART0_TX/LPSPI0_SOUT/TCLK0}
+  - {pin_num: '34', peripheral: ADC0, signal: 'SE, 4', pin_signal: ADC0_SE4/ADC1_SE14/PTB0/LPUART0_RX/LPSPI0_PCS0/LPTMR0_ALT3/PWT_IN3}
+  - {pin_num: '35', peripheral: ADC2, signal: 'SE, 15', pin_signal: ADC2_SE15/PTC9/LPUART1_TX/FTM1_FLT1/LPUART0_RTS}
+  - {pin_num: '36', peripheral: ADC2, signal: 'SE, 14', pin_signal: ADC2_SE14/PTC8/LPUART1_RX/FTM1_FLT0/LPUART0_CTS}
+  - {pin_num: '37', peripheral: ADC0, signal: 'SE, 3', pin_signal: ADC0_SE3/ACMP1_IN1/PTA7/FTM0_FLT2/RTC_CLKIN/LPUART1_RTS}
+  - {pin_num: '44', peripheral: ADC1, signal: 'SE, 6', pin_signal: ADC1_SE6/ACMP1_IN6/PTD4/FTM0_FLT3/FTM3_FLT3}
+  - {pin_num: '45', peripheral: ADC1, signal: 'SE, 3', pin_signal: ADC1_SE3/PTD3/FTM3_CH5/LPSPI1_PCS0/FXIO_D5/TRGMUX_IN4/NMI_b}
+  - {pin_num: '46', peripheral: ADC1, signal: 'SE, 2', pin_signal: ADC1_SE2/PTD2/FTM3_CH4/LPSPI1_SOUT/FXIO_D4/TRGMUX_IN5}
+  - {pin_num: '47', peripheral: ADC1, signal: 'SE, 1', pin_signal: ADC1_SE1/PTA3/FTM3_CH1/LPI2C0_SCL/EWM_IN/LPUART0_TX}
+  - {pin_num: '52', peripheral: ADC1, signal: 'SE, 4', pin_signal: ADC1_SE4/PTC6/LPUART1_RX/CAN1_RX/FTM3_CH2}
+  - {pin_num: '51', peripheral: ADC1, signal: 'SE, 5', pin_signal: ADC1_SE5/PTC7/LPUART1_TX/CAN1_TX/FTM3_CH3}
+  - {pin_num: '58', peripheral: JTAG, signal: TDO, pin_signal: PTA10/FTM1_CH4/LPUART0_TX/FXIO_D0/JTAG_TDO/noetm_Trace_SWO}
+  - {pin_num: '49', peripheral: GPIOA, signal: 'GPIO, 1', pin_signal: ADC0_SE1/ACMP0_IN1/PTA1/FTM1_CH1/LPI2C0_SDAS/FXIO_D3/FTM1_QD_PHA/LPUART0_RTS/TRGMUX_OUT0}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -57,80 +74,30 @@ void BOARD_InitPins(void)
     CLOCK_EnableClock(kCLOCK_PortC);
     /* Clock Control: Clock enabled */
     CLOCK_EnableClock(kCLOCK_PortD);
-    /* Clock Control: Clock enabled */
-    CLOCK_EnableClock(kCLOCK_PortE);
 
-    /* PORTA0 (pin 50) is configured as LPUART0_CTS */
-    PORT_SetPinMux(PORTA, 0U, kPORT_MuxAlt6);
-
-    /* PORTA1 (pin 49) is configured as LPUART0_RTS */
-    PORT_SetPinMux(PORTA, 1U, kPORT_MuxAlt6);
+    /* PORTA1 (pin 49) is configured as PTA1 */
+    PORT_SetPinMux(PORTA, 1U, kPORT_MuxAsGpio);
 
     /* PORTA10 (pin 58) is configured as JTAG_TDO */
     PORT_SetPinMux(PORTA, 10U, kPORT_MuxAlt7);
 
-    /* PORTA11 (pin 57) is configured as PTA11 */
-    PORT_SetPinMux(PORTA, 11U, kPORT_MuxAsGpio);
+    /* PORTA3 (pin 47) is configured as ADC1_SE1 */
+    PORT_SetPinMux(PORTA, 3U, kPORT_PinDisabledOrAnalog);
 
-    /* PORTA12 (pin 56) is configured as CAN1_RX */
-    PORT_SetPinMux(PORTA, 12U, kPORT_MuxAlt3);
+    /* PORTA7 (pin 37) is configured as ADC0_SE3 */
+    PORT_SetPinMux(PORTA, 7U, kPORT_PinDisabledOrAnalog);
 
-    /* PORTA13 (pin 55) is configured as CAN1_TX */
-    PORT_SetPinMux(PORTA, 13U, kPORT_MuxAlt3);
+    /* PORTB0 (pin 34) is configured as ADC0_SE4 */
+    PORT_SetPinMux(PORTB, 0U, kPORT_PinDisabledOrAnalog);
 
-    /* PORTA2 (pin 48) is configured as LPUART0_RX */
-    PORT_SetPinMux(PORTA, 2U, kPORT_MuxAlt6);
+    /* PORTB1 (pin 33) is configured as ADC0_SE5 */
+    PORT_SetPinMux(PORTB, 1U, kPORT_PinDisabledOrAnalog);
 
-    /* PORTA3 (pin 47) is configured as LPUART0_TX */
-    PORT_SetPinMux(PORTA, 3U, kPORT_MuxAlt6);
+    /* PORTB2 (pin 32) is configured as ADC0_SE6 */
+    PORT_SetPinMux(PORTB, 2U, kPORT_PinDisabledOrAnalog);
 
-    /* PORTA4 (pin 64) is configured as JTAG_TMS */
-    PORT_SetPinMux(PORTA, 4U, kPORT_MuxAlt7);
-
-    /* PORTA5 (pin 63) is configured as JTAG_TRST_b */
-    PORT_SetPinMux(PORTA, 5U, kPORT_MuxAlt6);
-
-    /* PORTA6 (pin 38) is configured as LPUART1_CTS */
-    PORT_SetPinMux(PORTA, 6U, kPORT_MuxAlt6);
-
-    /* PORTA7 (pin 37) is configured as LPUART1_RTS */
-    PORT_SetPinMux(PORTA, 7U, kPORT_MuxAlt6);
-
-    /* PORTB0 (pin 34) is configured as LPSPI0_PCS0 */
-    PORT_SetPinMux(PORTB, 0U, kPORT_MuxAlt3);
-
-    /* PORTB1 (pin 33) is configured as PTB1 */
-    PORT_SetPinMux(PORTB, 1U, kPORT_MuxAsGpio);
-
-    /* PORTB12 (pin 43) is configured as ADC1_SE7 */
-    PORT_SetPinMux(PORTB, 12U, kPORT_PinDisabledOrAnalog);
-
-    /* PORTB13 (pin 42) is configured as ADC1_SE8 */
-    PORT_SetPinMux(PORTB, 13U, kPORT_PinDisabledOrAnalog);
-
-    /* PORTB2 (pin 32) is configured as LPSPI0_SCK */
-    PORT_SetPinMux(PORTB, 2U, kPORT_MuxAlt3);
-
-    /* PORTB3 (pin 31) is configured as LPSPI0_SIN */
-    PORT_SetPinMux(PORTB, 3U, kPORT_MuxAlt3);
-
-    /* PORTB4 (pin 19) is configured as LPSPI0_SOUT */
-    PORT_SetPinMux(PORTB, 4U, kPORT_MuxAlt3);
-
-    /* PORTB5 (pin 18) is configured as LPSPI0_PCS1 */
-    PORT_SetPinMux(PORTB, 5U, kPORT_MuxAlt3);
-
-    /* PORTB6 (pin 12) is configured as LPI2C0_SDA */
-    PORT_SetPinMux(PORTB, 6U, kPORT_MuxAlt2);
-
-    /* PORTB7 (pin 11) is configured as LPI2C0_SCL */
-    PORT_SetPinMux(PORTB, 7U, kPORT_MuxAlt2);
-
-    /* PORTC0 (pin 26) is configured as ADC0_SE8 */
-    PORT_SetPinMux(PORTC, 0U, kPORT_PinDisabledOrAnalog);
-
-    /* PORTC1 (pin 25) is configured as ADC0_SE9 */
-    PORT_SetPinMux(PORTC, 1U, kPORT_PinDisabledOrAnalog);
+    /* PORTB3 (pin 31) is configured as ADC0_SE7 */
+    PORT_SetPinMux(PORTB, 3U, kPORT_PinDisabledOrAnalog);
 
     /* PORTC14 (pin 30) is configured as ADC0_SE12 */
     PORT_SetPinMux(PORTC, 14U, kPORT_PinDisabledOrAnalog);
@@ -138,105 +105,27 @@ void BOARD_InitPins(void)
     /* PORTC15 (pin 29) is configured as ADC0_SE13 */
     PORT_SetPinMux(PORTC, 15U, kPORT_PinDisabledOrAnalog);
 
-    /* PORTC16 (pin 28) is configured as PTC16 */
-    PORT_SetPinMux(PORTC, 16U, kPORT_MuxAsGpio);
+    /* PORTC6 (pin 52) is configured as ADC1_SE4 */
+    PORT_SetPinMux(PORTC, 6U, kPORT_PinDisabledOrAnalog);
 
-    /* PORTC17 (pin 27) is configured as PTC17 */
-    PORT_SetPinMux(PORTC, 17U, kPORT_MuxAsGpio);
+    /* PORTC7 (pin 51) is configured as ADC1_SE5 */
+    PORT_SetPinMux(PORTC, 7U, kPORT_PinDisabledOrAnalog);
 
-    /* PORTC2 (pin 21) is configured as ADC0_SE10 */
-    PORT_SetPinMux(PORTC, 2U, kPORT_PinDisabledOrAnalog);
+    /* PORTC8 (pin 36) is configured as ADC2_SE14 */
+    PORT_SetPinMux(PORTC, 8U, kPORT_PinDisabledOrAnalog);
 
-    /* PORTC3 (pin 20) is configured as ADC0_SE11 */
-    PORT_SetPinMux(PORTC, 3U, kPORT_PinDisabledOrAnalog);
+    /* PORTC9 (pin 35) is configured as ADC2_SE15 */
+    PORT_SetPinMux(PORTC, 9U, kPORT_PinDisabledOrAnalog);
 
-    /* PORTC4 (pin 62) is configured as JTAG_TCLK */
-    PORT_SetPinMux(PORTC, 4U, kPORT_MuxAlt7);
+    /* PORTD2 (pin 46) is configured as ADC1_SE2 */
+    PORT_SetPinMux(PORTD, 2U, kPORT_PinDisabledOrAnalog);
 
-    /* PORTC5 (pin 61) is configured as JTAG_TDI */
-    PORT_SetPinMux(PORTC, 5U, kPORT_MuxAlt7);
-
-    /* PORTC6 (pin 52) is configured as PTC6 */
-    PORT_SetPinMux(PORTC, 6U, kPORT_MuxAsGpio);
-
-    /* PORTC7 (pin 51) is configured as PTC7 */
-    PORT_SetPinMux(PORTC, 7U, kPORT_MuxAsGpio);
-
-    /* PORTC8 (pin 36) is configured as LPUART1_RX */
-    PORT_SetPinMux(PORTC, 8U, kPORT_MuxAlt2);
-
-    /* PORTC9 (pin 35) is configured as LPUART1_TX */
-    PORT_SetPinMux(PORTC, 9U, kPORT_MuxAlt2);
-
-    /* PORTD0 (pin 2) is configured as LPSPI1_SCK */
-    PORT_SetPinMux(PORTD, 0U, kPORT_MuxAlt3);
-
-    /* PORTD1 (pin 1) is configured as LPSPI1_SIN */
-    PORT_SetPinMux(PORTD, 1U, kPORT_MuxAlt3);
-
-    /* PORTD15 (pin 15) is configured as PTD15 */
-    PORT_SetPinMux(PORTD, 15U, kPORT_MuxAsGpio);
-
-    /* PORTD16 (pin 14) is configured as PTD16 */
-    PORT_SetPinMux(PORTD, 16U, kPORT_MuxAsGpio);
-
-    /* PORTD2 (pin 46) is configured as LPSPI1_SOUT */
-    PORT_SetPinMux(PORTD, 2U, kPORT_MuxAlt3);
-
-    /* PORTD3 (pin 45) is configured as LPSPI1_PCS0 */
-    PORT_SetPinMux(PORTD, 3U, kPORT_MuxAlt3);
+    /* PORTD3 (pin 45) is configured as ADC1_SE3 */
+    PORT_SetPinMux(PORTD, 3U, kPORT_PinDisabledOrAnalog);
 
     /* PORTD4 (pin 44) is configured as ADC1_SE6 */
     PORT_SetPinMux(PORTD, 4U, kPORT_PinDisabledOrAnalog);
-
-    /* PORTD5 (pin 24) is configured as PTD5 */
-    PORT_SetPinMux(PORTD, 5U, kPORT_MuxAsGpio);
-
-    /* PORTD6 (pin 23) is configured as LPUART2_RX */
-    PORT_SetPinMux(PORTD, 6U, kPORT_MuxAlt2);
-
-    /* PORTD7 (pin 22) is configured as LPUART2_TX */
-    PORT_SetPinMux(PORTD, 7U, kPORT_MuxAlt2);
-
-    /* PORTE0 (pin 60) is configured as LPI2C1_SDA */
-    PORT_SetPinMux(PORTE, 0U, kPORT_MuxAlt4);
-
-    /* PORTE1 (pin 59) is configured as LPI2C1_SCL */
-    PORT_SetPinMux(PORTE, 1U, kPORT_MuxAlt4);
-
-    /* PORTE10 (pin 4) is configured as ADC2_SE12 */
-    PORT_SetPinMux(PORTE, 10U, kPORT_PinDisabledOrAnalog);
-
-    /* PORTE11 (pin 3) is configured as ADC2_SE13 */
-    PORT_SetPinMux(PORTE, 11U, kPORT_PinDisabledOrAnalog);
-
-    /* PORTE2 (pin 54) is configured as PTE2 */
-    PORT_SetPinMux(PORTE, 2U, kPORT_MuxAsGpio);
-
-    /* PORTE3 (pin 13) is configured as LPUART2_RTS */
-    PORT_SetPinMux(PORTE, 3U, kPORT_MuxAlt3);
-
-    /* PORTE4 (pin 6) is configured as CAN0_RX */
-    PORT_SetPinMux(PORTE, 4U, kPORT_MuxAlt5);
-
-    /* PORTE5 (pin 5) is configured as CAN0_TX */
-    PORT_SetPinMux(PORTE, 5U, kPORT_MuxAlt5);
-
-    /* PORTE6 (pin 53) is configured as LPSPI0_PCS2 */
-    PORT_SetPinMux(PORTE, 6U, kPORT_MuxAlt2);
-
-    /* PORTE7 (pin 39) is configured as ADC2_SE2 */
-    PORT_SetPinMux(PORTE, 7U, kPORT_PinDisabledOrAnalog);
-
-    /* PORTE8 (pin 17) is configured as PTE8 */
-    PORT_SetPinMux(PORTE, 8U, kPORT_MuxAsGpio);
-
-    /* PORTE9 (pin 16) is configured as LPUART2_CTS */
-    PORT_SetPinMux(PORTE, 9U, kPORT_MuxAlt3);
 }
-/***********************************************************************************************************************
- * EOF
- **********************************************************************************************************************/
 /***********************************************************************************************************************
  * EOF
  **********************************************************************************************************************/
