@@ -1,10 +1,11 @@
 #include "FreeRTOS.h"
-#include "CanMessage.h"
 #include "task.h"
+
+#include "CanMessage.h"
 #include "can.h"
 #include "constants.h"
 #include "StateMachine.h"
-#include "canmessagestructs.h"
+
 
 using namespace BSP;
 
@@ -64,7 +65,6 @@ void sendSensors()
     memcpy(frame1.data, &canStruct, sizeof(canStruct));
     can.tx(CAN_BUS, frame1);
 
-    can::CANlight &can1 = can::CANlight::StaticClass();
     can::CANlight::frame frame2;
     frame2.id = CAN_ID_TIME + 2;
     frame2.ext = 1;

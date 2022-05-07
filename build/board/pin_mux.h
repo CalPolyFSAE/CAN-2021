@@ -16,21 +16,20 @@
  **********************************************************************************************************************/
 
 #if defined(__cplusplus)
-extern "C"
-{
+extern "C" {
 #endif
 
-    /*!
+/*!
  * @brief Calls initialization functions.
  *
  */
-    void BOARD_InitBootPins(void);
+void BOARD_InitBootPins(void);
 
-    /*!
+/*!
  * @brief Configures pin routing and optionally pin electrical features.
  *
  */
-    void BOARD_InitPins(void);
+void BOARD_InitPins(void);
 
 #if defined(__cplusplus)
 }

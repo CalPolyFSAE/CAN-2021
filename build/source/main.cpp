@@ -7,6 +7,7 @@
 #include "StateMachine.h"
 #include "CanMessage.h"
 #include <ctime>
+
 /* Hardware includes. */
 #include "MKE18F16.h"
 #include "pin_mux.h"
@@ -18,9 +19,7 @@ using namespace BSP;
 void taskReadHunHzValuesSendCanMessages(void *)
 {
 	TickType_t xLastWakeTime;
-	int end;
-	int duration;
-	int count = 0;
+
 
 	/*
 	Infinite loop below for reading from 100 HZ sensors. count used to keep track of number of current
@@ -39,17 +38,14 @@ void taskReadHunHzValuesSendCanMessages(void *)
 		sendSensors();
 		sendFourSGauges();
 		sendLastSGauge();
+
+		// Test Code
 		CANFirstSensors sensorValues1 = StateMachine::getFirstSensorsCANSensors();
 		CANLastSensors sensorValues2 = StateMachine::getLastSensorsCANSensors();
 		CANFourSGauges sensorValues3 = StateMachine::getFourSGaugesCANSensors();
 		CANLastSGauge sensorValues4 = StateMachine::getLastSGaugeCANSensors();
-		vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS((1 / .1)));
-		count++;
-		if (count == 100)
-		{
-			end = xTaskGetTickCount();
-			duration = (end) / configTICK_RATE_HZ;
-		}
+
+		vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(10));
 	}
 }
 
