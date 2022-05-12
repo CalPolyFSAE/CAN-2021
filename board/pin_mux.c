@@ -7,11 +7,11 @@
 /*
  * TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 !!GlobalInfo
-product: Pins v10.0
+product: Pins v11.0
 processor: MKE18F512xxx16
 package_id: MKE18F512VLH16
 mcu_data: ksdk2_0
-processor_version: 10.0.0
+processor_version: 11.0.1
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -37,23 +37,26 @@ void BOARD_InitBootPins(void)
 BOARD_InitPins:
 - options: {callFromInitBoot: 'true', coreID: core0, enableClock: 'true'}
 - pin_list:
-  - {pin_num: '29', peripheral: ADC0, signal: 'SE, 13', pin_signal: ADC0_SE13/ACMP2_IN4/PTC15/FTM1_CH3}
-  - {pin_num: '30', peripheral: ADC0, signal: 'SE, 12', pin_signal: ADC0_SE12/ACMP2_IN5/PTC14/FTM1_CH2}
-  - {pin_num: '31', peripheral: ADC0, signal: 'SE, 7', pin_signal: ADC0_SE7/PTB3/FTM1_CH1/LPSPI0_SIN/FTM1_QD_PHA/TRGMUX_IN2}
+  - {pin_num: '47', peripheral: ADC1, signal: 'SE, 1', pin_signal: ADC1_SE1/PTA3/FTM3_CH1/LPI2C0_SCL/EWM_IN/LPUART0_TX}
+  - {pin_num: '64', peripheral: JTAG, signal: JTAG_TMS_SWD_DIO, pin_signal: PTA4/ACMP0_OUT/EWM_OUT_b/JTAG_TMS/SWD_DIO}
+  - {pin_num: '63', peripheral: JTAG, signal: TRST, pin_signal: PTA5/TCLK1/JTAG_TRST_b/RESET_b}
   - {pin_num: '32', peripheral: ADC0, signal: 'SE, 6', pin_signal: ADC0_SE6/PTB2/FTM1_CH0/LPSPI0_SCK/FTM1_QD_PHB/TRGMUX_IN3}
+  - {pin_num: '31', peripheral: ADC0, signal: 'SE, 7', pin_signal: ADC0_SE7/PTB3/FTM1_CH1/LPSPI0_SIN/FTM1_QD_PHA/TRGMUX_IN2}
+  - {pin_num: '30', peripheral: ADC0, signal: 'SE, 12', pin_signal: ADC0_SE12/ACMP2_IN5/PTC14/FTM1_CH2}
+  - {pin_num: '29', peripheral: ADC0, signal: 'SE, 13', pin_signal: ADC0_SE13/ACMP2_IN4/PTC15/FTM1_CH3}
   - {pin_num: '33', peripheral: ADC0, signal: 'SE, 5', pin_signal: ADC0_SE5/ADC1_SE15/PTB1/LPUART0_TX/LPSPI0_SOUT/TCLK0}
   - {pin_num: '34', peripheral: ADC0, signal: 'SE, 4', pin_signal: ADC0_SE4/ADC1_SE14/PTB0/LPUART0_RX/LPSPI0_PCS0/LPTMR0_ALT3/PWT_IN3}
   - {pin_num: '35', peripheral: ADC2, signal: 'SE, 15', pin_signal: ADC2_SE15/PTC9/LPUART1_TX/FTM1_FLT1/LPUART0_RTS}
   - {pin_num: '36', peripheral: ADC2, signal: 'SE, 14', pin_signal: ADC2_SE14/PTC8/LPUART1_RX/FTM1_FLT0/LPUART0_CTS}
   - {pin_num: '37', peripheral: ADC0, signal: 'SE, 3', pin_signal: ADC0_SE3/ACMP1_IN1/PTA7/FTM0_FLT2/RTC_CLKIN/LPUART1_RTS}
-  - {pin_num: '44', peripheral: ADC1, signal: 'SE, 6', pin_signal: ADC1_SE6/ACMP1_IN6/PTD4/FTM0_FLT3/FTM3_FLT3}
-  - {pin_num: '45', peripheral: ADC1, signal: 'SE, 3', pin_signal: ADC1_SE3/PTD3/FTM3_CH5/LPSPI1_PCS0/FXIO_D5/TRGMUX_IN4/NMI_b}
   - {pin_num: '46', peripheral: ADC1, signal: 'SE, 2', pin_signal: ADC1_SE2/PTD2/FTM3_CH4/LPSPI1_SOUT/FXIO_D4/TRGMUX_IN5}
-  - {pin_num: '47', peripheral: ADC1, signal: 'SE, 1', pin_signal: ADC1_SE1/PTA3/FTM3_CH1/LPI2C0_SCL/EWM_IN/LPUART0_TX}
-  - {pin_num: '52', peripheral: ADC1, signal: 'SE, 4', pin_signal: ADC1_SE4/PTC6/LPUART1_RX/CAN1_RX/FTM3_CH2}
-  - {pin_num: '51', peripheral: ADC1, signal: 'SE, 5', pin_signal: ADC1_SE5/PTC7/LPUART1_TX/CAN1_TX/FTM3_CH3}
+  - {pin_num: '45', peripheral: ADC1, signal: 'SE, 3', pin_signal: ADC1_SE3/PTD3/FTM3_CH5/LPSPI1_PCS0/FXIO_D5/TRGMUX_IN4/NMI_b}
+  - {pin_num: '44', peripheral: ADC1, signal: 'SE, 6', pin_signal: ADC1_SE6/ACMP1_IN6/PTD4/FTM0_FLT3/FTM3_FLT3}
+  - {pin_num: '51', peripheral: CAN1, signal: TX, pin_signal: ADC1_SE5/PTC7/LPUART1_TX/CAN1_TX/FTM3_CH3}
+  - {pin_num: '52', peripheral: CAN1, signal: RX, pin_signal: ADC1_SE4/PTC6/LPUART1_RX/CAN1_RX/FTM3_CH2}
+  - {pin_num: '62', peripheral: JTAG, signal: JTAG_TCLK_SWD_CLK, pin_signal: ACMP0_IN2/PTC4/FTM1_CH0/RTC_CLKOUT/EWM_IN/FTM1_QD_PHB/JTAG_TCLK/SWD_CLK}
+  - {pin_num: '61', peripheral: JTAG, signal: TDI, pin_signal: PTC5/FTM2_CH0/RTC_CLKOUT/LPI2C1_HREQ/FTM2_QD_PHB/JTAG_TDI}
   - {pin_num: '58', peripheral: JTAG, signal: TDO, pin_signal: PTA10/FTM1_CH4/LPUART0_TX/FXIO_D0/JTAG_TDO/noetm_Trace_SWO}
-  - {pin_num: '49', peripheral: GPIOA, signal: 'GPIO, 1', pin_signal: ADC0_SE1/ACMP0_IN1/PTA1/FTM1_CH1/LPI2C0_SDAS/FXIO_D3/FTM1_QD_PHA/LPUART0_RTS/TRGMUX_OUT0}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -75,14 +78,17 @@ void BOARD_InitPins(void)
     /* Clock Control: Clock enabled */
     CLOCK_EnableClock(kCLOCK_PortD);
 
-    /* PORTA1 (pin 49) is configured as PTA1 */
-    PORT_SetPinMux(PORTA, 1U, kPORT_MuxAsGpio);
-
     /* PORTA10 (pin 58) is configured as JTAG_TDO */
     PORT_SetPinMux(PORTA, 10U, kPORT_MuxAlt7);
 
     /* PORTA3 (pin 47) is configured as ADC1_SE1 */
     PORT_SetPinMux(PORTA, 3U, kPORT_PinDisabledOrAnalog);
+
+    /* PORTA4 (pin 64) is configured as JTAG_TMS */
+    PORT_SetPinMux(PORTA, 4U, kPORT_MuxAlt7);
+
+    /* PORTA5 (pin 63) is configured as JTAG_TRST_b */
+    PORT_SetPinMux(PORTA, 5U, kPORT_MuxAlt6);
 
     /* PORTA7 (pin 37) is configured as ADC0_SE3 */
     PORT_SetPinMux(PORTA, 7U, kPORT_PinDisabledOrAnalog);
@@ -105,11 +111,17 @@ void BOARD_InitPins(void)
     /* PORTC15 (pin 29) is configured as ADC0_SE13 */
     PORT_SetPinMux(PORTC, 15U, kPORT_PinDisabledOrAnalog);
 
-    /* PORTC6 (pin 52) is configured as ADC1_SE4 */
-    PORT_SetPinMux(PORTC, 6U, kPORT_PinDisabledOrAnalog);
+    /* PORTC4 (pin 62) is configured as JTAG_TCLK */
+    PORT_SetPinMux(PORTC, 4U, kPORT_MuxAlt7);
 
-    /* PORTC7 (pin 51) is configured as ADC1_SE5 */
-    PORT_SetPinMux(PORTC, 7U, kPORT_PinDisabledOrAnalog);
+    /* PORTC5 (pin 61) is configured as JTAG_TDI */
+    PORT_SetPinMux(PORTC, 5U, kPORT_MuxAlt7);
+
+    /* PORTC6 (pin 52) is configured as CAN1_RX */
+    PORT_SetPinMux(PORTC, 6U, kPORT_MuxAlt3);
+
+    /* PORTC7 (pin 51) is configured as CAN1_TX */
+    PORT_SetPinMux(PORTC, 7U, kPORT_MuxAlt3);
 
     /* PORTC8 (pin 36) is configured as ADC2_SE14 */
     PORT_SetPinMux(PORTC, 8U, kPORT_PinDisabledOrAnalog);

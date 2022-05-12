@@ -65,7 +65,7 @@ and channel to read data from */
 // Last 4 sensors = 702
 // First 5 sgauges = 703
 
-#define CAN_BUS 0
+#define CAN_BUS 1
 #define CAN_BAUD_RATE 1000000
 
 #endif

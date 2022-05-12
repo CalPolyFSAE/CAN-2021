@@ -50,7 +50,6 @@ void sendSensors()
     canStruct.AnalogData2 = cansensors1.sensor2->pin_data_1;
     canStruct.AnalogData3 = cansensors1.sensor3->pin_data_1;
     canStruct.AnalogData4 = cansensors1.sensor4->pin_data_1;
-    ;
 
     canLastStruct.AnalogData5 = cansensors2.sensor5->pin_data_1;
     canLastStruct.AnalogData6 = cansensors2.sensor6->pin_data_1;
@@ -87,12 +86,13 @@ void sendFourSGauges()
 
     can::CANlight &can = can::CANlight::StaticClass();
     can::CANlight::frame frame;
+
     frame.id = CAN_ID_TIME + 3;
     frame.ext = 1;
     frame.dlc = 8;
     memcpy(frame.data, &canFourSGaugesStruct, sizeof(canFourSGaugesStruct));
+
     can.tx(CAN_BUS, frame);
-    can::CANlight::frame fHun = can.readrx(1);
 }
 
 // Sends CAN message for the data of the fifth strain gauge
@@ -105,12 +105,13 @@ void sendLastSGauge()
 
     can::CANlight &can = can::CANlight::StaticClass();
     can::CANlight::frame frame;
+
     frame.id = CAN_ID_TIME + 4;
     frame.ext = 1;
     frame.dlc = 8;
     memcpy(frame.data, &canLastSGaugeStruct, sizeof(cansensors4));
+
     can.tx(CAN_BUS, frame);
-    can::CANlight::frame fHun = can.readrx(1);
 }
 
 // The following are public functions which call private helper functions to send CAN messages
