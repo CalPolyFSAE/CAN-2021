@@ -60,7 +60,7 @@ and channel to read data from */
 #define Sensor13_Channel 3
 
 // Priority of our project -- higher hex value means lower priority project (ours is low priority)
-#define CAN_ID_TIME NO_TARGET | LOW_CAN_PRIORITY| 0x0800 
+#define CAN_ID_TIME NO_TARGET | LOW_CAN_PRIORITY| 0x0700 
 // First 4 sensors = 701
 // Last 4 sensors = 702
 // First 5 sgauges = 703
