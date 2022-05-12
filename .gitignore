@@ -1,0 +1,5 @@
+
+build/board/clock_config.o
+*.o
+*.dblite
+*.dblite
